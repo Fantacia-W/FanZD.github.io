@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天际樊星 | 樊振东球迷聚集地</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* === 天际樊星设计系统 === */
+:root {
+    /* 星夜色彩系统 */
+    --sky-deep: #0a1026;
+    --sky-primary: #121b3a;
+    --sky-secondary: #1a2552;
+    --sky-accent: #23306c;
+    --star-gold: #e8c15c;
+    --star-light: #f5d680;
+    --star-bright: #ffeb9e;
+    --star-gradient: linear-gradient(135deg, #e8c15c 0%, #ffeb9e 100%);
+    --sky-gradient: linear-gradient(45deg, #0a1026 0%, #121b3a 30%, #1a2552 60%, #23306c 100%);
+    
+    /* 星际中性色 */
+    --cosmic-white: #ffffff;
+    --moonlight: #f5f7ff;
+    --starlight: #a5aec0;
+    --nebula-gray: #6b7280;
+    --dark-matter: #2d3348;
+    
+    /* 交互状态 */
+    --comet-trail: #f8d768;
+    --meteor-burn: #d4a732;
+    --supernova: #ff4757;
+    --pulsar: #00d166;
+    
+    /* 宇宙阴影系统 */
+    --shadow-orbit: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-moon: 0 4px 20px rgba(0, 0, 0, 0.2);
+    --shadow-planet: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --shadow-galaxy: 0 20px 60px rgba(0, 0, 0, 0.4);
+    --star-glow: 0 0 30px rgba(232, 193, 92, 0.4);
+    --supernova-glow: 0 0 50px rgba(232, 193, 92, 0.6);
+    
+    /* 空间渐变 */
+    --portal-gradient: linear-gradient(165deg, rgba(18, 27, 58, 0.95) 0%, rgba(35, 48, 108, 0.95) 100%);
+    --event-horizon: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --wormhole: linear-gradient(135deg, #e8c15c 0%, #ffeb9e 100%);
+    
+    /* 天体几何 */
+    --orbit-sm: 8px;
+    --orbit-md: 12px;
+    --orbit-lg: 20px;
+    --orbit-xl: 30px;
+    --orbit-full: 100px;
+    
+    /* 时空间距 - 调整为更紧凑的值 */
+    --space-xs: 6px;
+    --space-sm: 12px;
+    --space-md: 18px;
+    --space-lg: 24px;
+    --space-xl: 36px;
+    --space-2xl: 48px;
+    
+    /* 星际字体 */
+    --font-cosmic: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-stellar: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'SF Mono', 'Menlo', 'Monaco', monospace;
+    
+    /* 背景图URL - 修正这里的语法 */
+    --background-image: url("照片集/背影.png");
+}
+
+/* === 宇宙全局重置 === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-stellar);
+    background: var(--sky-gradient);
+    color: var(--moonlight);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* === 星云背景系统 === */
+.cosmic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    /* 添加背景图设置 */
+    background: var(--background-image) center/cover no-repeat;
+    filter: blur(2px);
+    animation: nebulaFloat 120s infinite linear;
+}
+
+/* === 天体装饰元素 === */
+.celestial-decoration {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.constellation {
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(232, 193, 92, 0.08);
+    position: fixed;
+}
+
+.constellation-tl {
+    top: -150px;
+    left: -150px;
+    transform: rotate(45deg);
+}
+
+.constellation-br {
+    bottom: -150px;
+    right: -150px;
+    transform: rotate(45deg);
+}
+
+.aurora-line {
+    position: fixed;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--star-gold) 20%,
+        var(--star-gold) 80%,
+        transparent 100%);
+    opacity: 0.1;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 20px var(--star-gold);
+}
+
+/* === 星际访问门户 === */
+.portal-container {
+    width: 100%;
+    max-width: 420px; /* 缩小最大宽度 */
+    padding: var(--space-lg);
+    position: relative;
+    z-index: 10;
+}
+
+/* === 量子态卡片 === */
+.quantum-card {
+    background: var(--portal-gradient);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: var(--orbit-xl);
+    padding: var(--space-xl); /* 减小内边距 */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 
+        var(--shadow-galaxy),
+        0 0 0 1px rgba(232, 193, 92, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    animation: quantumVibration 0.5s ease-out;
+}
+
+.quantum-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        var(--star-gold),
+        transparent);
+    animation: auroraPulse 4s ease-in-out infinite;
+}
+
+.quantum-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(232, 193, 92, 0.06) 0%,
+        transparent 30%,
+        transparent 70%,
+        rgba(232, 193, 92, 0.06) 100%);
+    pointer-events: none;
+}
+
+/* === 天际樊星品牌 === */
+.stellar-brand {
+    text-align: center;
+    margin-bottom: var(--space-xl); /* 减小下边距 */
+    position: relative;
+}
+
+.brand-signature {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm); /* 减小下边距 */
+}
+
+.stellar-icon {
+    width: 44px; /* 缩小图标 */
+    height: 44px;
+    background: var(--star-gradient);
+    border-radius: var(--orbit-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--sky-deep);
+    box-shadow: var(--star-glow);
+    animation: stellarPulse 3s infinite ease-in-out;
+}
+
+.stellar-title {
+    font-family: var(--font-cosmic);
+    font-size: 2.2rem; /* 缩小字体 */
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: var(--star-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 12px rgba(232, 193, 92, 0.4);
+}
+
+.portal-subtitle {
+    font-size: 1rem; /* 缩小字体 */
+    color: var(--starlight);
+    letter-spacing: 2px; /* 减小字间距 */
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: var(--space-xs);
+}
+
+.portal-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px; /* 缩短线条 */
+    height: 2px;
+    background: var(--star-gradient);
+    border-radius: var(--orbit-full);
+}
+
+/* === 星际表单系统 === */
+.stellar-form {
+    margin-bottom: var(--space-md); /* 减小下边距 */
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-xs); /* 减小下边距 */
+    color: var(--moonlight);
+    font-size: 0.9rem; /* 缩小字体 */
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-fieldset {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.stellar-input {
+    width: 100%;
+    padding: 15px 18px 15px 50px; /* 减小内边距 */
+    background: var(--event-horizon);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--orbit-lg);
+    color: var(--moonlight);
+    font-size: 0.95rem; /* 缩小字体 */
+    font-family: var(--font-stellar);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    outline: none;
+    backdrop-filter: blur(12px);
+}
+
+.stellar-input:focus {
+    border-color: var(--star-gold);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(232, 193, 92, 0.15);
+}
+
+.stellar-input:hover:not(:focus) {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+}
+
+.input-guidance {
+    position: absolute;
+    left: 18px; /* 调整位置 */
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--starlight);
+    font-size: 1.2rem; /* 缩小图标 */
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+}
+
+.stellar-input:focus + .input-guidance {
+    color: var(--star-gold);
+    transform: translateY(-50%) scale(1.2);
+}
+
+/* === 密码视界切换 === */
+.vision-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--starlight);
+    cursor: pointer;
+    font-size: 1.2rem; /* 缩小图标 */
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--orbit-md);
+    backdrop-filter: blur(6px);
+}
+
+.vision-toggle:hover {
+    color: var(--star-gold);
+    background: rgba(232, 193, 92, 0.12);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.vision-toggle:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* === 星际表单选项 === */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg); /* 减小下边距 */
+}
+
+.memory-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-toggle {
+    width: 22px; /* 缩小开关 */
+    height: 22px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    margin-right: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.switch-input:checked + .switch-toggle {
+    background: var(--star-gradient);
+    border-color: var(--star-gold);
+    transform: scale(1.1);
+}
+
+.switch-toggle::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--sky-deep);
+    border-radius: 2px;
+    transform: scale(0);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.switch-input:checked + .switch-toggle::after {
+    transform: scale(1);
+}
+
+.switch-label {
+    color: var(--starlight);
+    font-size: 0.9rem; /* 缩小字体 */
+}
+
+.stellar-link {
+    color: var(--star-gold);
+    text-decoration: none;
+    font-size: 0.9rem; /* 缩小字体 */
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 2px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stellar-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--star-gradient);
+    transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stellar-link:hover {
+    color: var(--star-bright);
+}
+
+.stellar-link:hover::after {
+    width: 100%;
+}
+
+/* === 星际跃迁按钮 === */
+.warp-container {
+    position: relative;
+    margin-bottom: var(--space-lg); /* 减小下边距 */
+}
+
+.warp-button {
+    width: 100%;
+    padding: 16px; /* 减小内边距 */
+    background: var(--wormhole);
+    border: none;
+    border-radius: var(--orbit-lg);
+    color: var(--sky-deep);
+    font-size: 1rem; /* 缩小字体 */
+    font-weight: 600;
+    letter-spacing: 1.2px; /* 减小字间距 */
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 30px rgba(232, 193, 92, 0.3), /* 减小阴影 */
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: translateZ(0);
+}
+
+.warp-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent);
+    transition: left 0.8s ease;
+}
+
+.warp-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 15px 35px rgba(232, 193, 92, 0.4),
+        0 0 0 2px rgba(255, 255, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.warp-button:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+.warp-button:hover::before {
+    left: 100%;
+}
+
+.warp-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    position: relative;
+    z-index: 2;
+}
+
+/* === 星际注册通道 === */
+.stellar-gateway {
+    text-align: center;
+    padding-top: var(--space-md); /* 减小上内边距 */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.gateway-text {
+    color: var(--starlight);
+    font-size: 0.9rem; /* 缩小字体 */
+    margin-bottom: var(--space-sm); /* 减小下边距 */
+}
+
+.gateway-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 12px 24px; /* 减小内边距 */
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--orbit-lg);
+    color: var(--star-gold);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.gateway-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(232, 193, 92, 0.12),
+        transparent);
+    transition: left 0.8s ease;
+}
+
+.gateway-link:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(232, 193, 92, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); /* 减小阴影 */
+}
+
+.gateway-link:hover::before {
+    left: 100%;
+}
+
+/* === 星际连接方式 === */
+.stellar-connections {
+    margin-top: var(--space-xl); /* 减小上边距 */
+    padding-top: var(--space-xl); /* 减小上内边距 */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.connections-title {
+    text-align: center;
+    color: var(--starlight);
+    font-size: 0.85rem; /* 缩小字体 */
+    letter-spacing: 1.2px; /* 减小字间距 */
+    text-transform: uppercase;
+    margin-bottom: var(--space-md); /* 减小下边距 */
+    position: relative;
+}
+
+.connections-title::before,
+.connections-title::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0.12),
+        transparent);
+}
+
+.connections-title::before {
+    left: 0;
+}
+
+.connections-title::after {
+    right: 0;
+}
+
+.connection-portals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm); /* 减小间距 */
+}
+
+.connection-portal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm); /* 减小内边距 */
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--orbit-md); /* 使用较小圆角 */
+    color: var(--starlight);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.connection-portal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--star-gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.connection-portal:hover {
+    transform: translateY(-3px);
+    border-color: rgba(232, 193, 92, 0.35);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* 减小阴影 */
+}
+
+.connection-portal:hover::before {
+    opacity: 0.12;
+}
+
+.portal-icon {
+    font-size: 1.4rem; /* 缩小图标 */
+    margin-bottom: 6px; /* 减小下边距 */
+    position: relative;
+    z-index: 2;
+}
+
+.connection-portal:hover .portal-icon {
+    background: var(--star-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.portal-name {
+    font-size: 0.8rem; /* 缩小字体 */
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+/* === 星际动画 === */
+@keyframes nebulaFloat {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(0.5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(10px) rotate(-0.5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes stellarPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: var(--star-glow);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: var(--supernova-glow);
+    }
+}
+
+@keyframes auroraPulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes quantumVibration {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes stellarRipple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* === 星际反馈动画 === */
+.stellar-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: stellarRipple 0.6s linear;
+    pointer-events: none;
+}
+
+.pulsar-success {
+    animation: pulsarFlash 0.5s ease;
+}
+
+.quantum-error {
+    animation: quantumShake 0.5s ease;
+}
+
+@keyframes pulsarFlash {
+    0%, 100% {
+        box-shadow: 
+            0 10px 30px rgba(232, 193, 92, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 10px 30px rgba(232, 193, 92, 0.3),
+            0 0 0 12px rgba(0, 209, 102, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+}
+
+@keyframes quantumShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* === 星际响应式设计 === */
+@media (max-width: 768px) {
+    .portal-container {
+        padding: var(--space-md);
+        max-width: 90%;
+    }
+    
+    .quantum-card {
+        padding: var(--space-lg);
+    }
+    
+    .stellar-title {
+        font-size: 2rem;
+    }
+    
+    .connection-portals {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .quantum-card {
+        padding: var(--space-md);
+    }
+    
+    .brand-signature {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+    
+    .stellar-title {
+        font-size: 1.8rem;
+    }
+    
+    .stellar-input {
+        padding: 14px 14px 14px 46px;
+    }
+    
+    .warp-button {
+        padding: 14px;
+    }
+}
+
+/* === 星际工具类 === */
+.cosmic-fade-in {
+    animation: cosmicAppear 0.6s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+@keyframes cosmicAppear {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* === 星际加载状态 === */
+.stellar-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.loading-star {
+    width: 8px;
+    height: 8px;
+    background: var(--star-gradient);
+    border-radius: 50%;
+    animation: starTwinkle 1.4s infinite ease-in-out both;
+}
+
+.loading-star:nth-child(1) { animation-delay: -0.32s; }
+.loading-star:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes starTwinkle {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.3;
+    }
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* === 星际通信系统 === */
+.stellar-communication {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.stellar-message {
+    background: var(--portal-gradient);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 4px solid var(--star-gold);
+    border-radius: var(--orbit-md);
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    box-shadow: var(--shadow-planet);
+    transform: translateX(120%);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-width: 380px; /* 减小最大宽度 */
+    margin-bottom: var(--space-sm);
+}
+
+.stellar-message.pulsar {
+    border-left-color: var(--pulsar);
+}
+
+.stellar-message.supernova {
+    border-left-color: var(--supernova);
+}
+
+.stellar-message.active {
+    transform: translateX(0);
+}
+
+.message-icon {
+    font-size: 1.2rem; /* 缩小图标 */
+    color: var(--star-gold);
+}
+
+.stellar-message.pulsar .message-icon {
+    color: var(--pulsar);
+}
+
+.stellar-message.supernova .message-icon {
+    color: var(--supernova);
+}
+
+.message-content {
+    flex: 1;
+    font-size: 0.9rem; /* 缩小字体 */
+    color: var(--moonlight);
+}
+
+.message-close {
+    background: transparent;
+    border: none;
+    color: var(--starlight);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.message-close:hover {
+    color: var(--star-gold);
+}
+</style>
+</head>
+
+<body>
+<!-- 星云背景系统 - 简化版本 -->
+<div class="cosmic-background"></div>
+
+<!-- 天体装饰元素 -->
+<div class="celestial-decoration constellation constellation-tl"></div>
+<div class="celestial-decoration constellation constellation-br"></div>
+<div class="celestial-decoration aurora-line"></div>
+
+<!-- 星际通信系统 -->
+<div class="stellar-communication" id="stellarMessages"></div>
+
+<!-- 星际访问门户 -->
+<div class="portal-container">
+    <div class="quantum-card">
+        
+        <!-- 天际樊星品牌 -->
+        <div class="stellar-brand cosmic-fade-in">
+            <div class="brand-signature">
+                <div class="stellar-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h1 class="stellar-title">天际樊星</h1>
+            </div>
+            <h2 class="portal-subtitle">星际访问门户</h2>
+        </div>
+        
+        <!-- 星际表单 -->
+        <form id="stellarForm">
+            <div class="stellar-form cosmic-fade-in delay-1">
+                <label for="stellarIdentity" class="form-label">星际标识</label>
+                <div class="input-fieldset">
+                    <input type="text" id="stellarIdentity" class="stellar-input" placeholder="输入您的标识代码" required>
+                    <div class="input-guidance">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stellar-form cosmic-fade-in delay-2">
+                <label for="stellarKey" class="form-label">星际密钥</label>
+                <div class="input-fieldset">
+                    <input type="password" id="stellarKey" class="stellar-input" placeholder="输入您的访问密钥" required>
+                    <div class="input-guidance">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <button type="button" class="vision-toggle" id="visionToggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="form-options cosmic-fade-in delay-3">
+                <label class="memory-switch">
+                    <input type="checkbox" class="switch-input" id="memoryCore">
+                    <span class="switch-toggle"></span>
+                    <span class="switch-label">记忆核心</span>
+                </label>
+                <a href="#" class="stellar-link">密钥遗失？</a>
+            </div>
+            
+            <div class="warp-container cosmic-fade-in delay-4">
+                <button type="submit" class="warp-button" id="warpButton">
+                    <div class="warp-content">
+                        <i class="fas fa-rocket"></i>
+                        <span>启动星际跃迁</span>
+                    </div>
+
+                </button>
+            </div>
+        </form>
+        
+        <!-- 星际注册通道 -->
+        <div class="stellar-gateway cosmic-fade-in delay-5">
+            <p class="gateway-text">未注册星际身份？</p>
+            <a href="#" class="gateway-link">
+                <i class="fas fa-user-plus"></i>
+                <span>创建星际身份</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <!-- 星际连接方式 -->
+        <div class="stellar-connections cosmic-fade-in delay-5">
+            <h3 class="connections-title">星际连接</h3>
+            <div class="connection-portals">
+                <button class="connection-portal" id="cosmicWechat">
+                    <div class="portal-icon">
+                        <i class="fab fa-weixin"></i>
+                    </div>
+                    <div class="portal-name">星云通讯</div>
+                </button>
+                <button class="connection-portal" id="cosmicQQ">
+                    <div class="portal-icon">
+                        <i class="fab fa-qq"></i>
+                    </div>
+                    <div class="portal-name">量子通讯</div>
+                </button>
+                <button class="connection-portal" id="cosmicWeibo">
+                    <div class="portal-icon">
+                        <i class="fab fa-weibo"></i>
+                    </div>
+                    <div class="portal-name">星际广播</div>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+// 星际门户系统
+class StellarPortal {
+    constructor() {
+        this.initStellarSystem();
+    }
+
+    initStellarSystem() {
+        this.initVisionToggle();
+        this.initStellarValidation();
+        this.initRippleSystem();
+        this.initConnectionPortals();
+        this.initStellarSubmission();
+        this.initCosmicAnimations();
+        this.initMessageSystem();
+    }
+
+    // 视觉切换系统
+    initVisionToggle() {
+        const visionToggle = document.getElementById('visionToggle');
+        const stellarKey = document.getElementById('stellarKey');
+        
+        visionToggle.addEventListener('click', (e) => {
+            const type = stellarKey.type === 'password' ? 'text' : 'password';
+            stellarKey.type = type;
+            visionToggle.innerHTML = type === 'password' 
+                ? '<i class="fas fa-eye"></i>' 
+                : '<i class="fas fa-eye-slash"></i>';
+            
+            // 创建星际涟漪
+            this.createStellarRipple(e);
+            visionToggle.classList.add('active');
+            setTimeout(() => visionToggle.classList.remove('active'), 300);
+            
+            // 发送视觉切换消息
+            this.sendMessage(type === 'password' ? '视觉模式：安全' : '视觉模式：开放', 'info');
+        });
+    }
+
+    // 星际表单验证
+    initStellarValidation() {
+        const form = document.getElementById('stellarForm');
+        const inputs = form.querySelectorAll('.stellar-input');
+        
+        inputs.forEach(input => {
+            // 输入时验证
+            input.addEventListener('input', () => this.validateStellarInput(input));
+            
+            // 焦点时激活
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('activated');
+            });
+            
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('activated');
+                this.validateStellarInput(input);
+            });
+        });
+    }
+
+    validateStellarInput(input) {
+        const container = input.parentElement;
+        const value = input.value.trim();
+        
+        // 清除之前的验证状态
+        container.classList.remove('validated', 'compromised');
+        
+        if (!value) return;
+        
+        if (input.id === 'stellarIdentity') {
+            const isValid = this.validateStellarIdentity(value);
+            container.classList.add(isValid ? 'validated' : 'compromised');
+        } else if (input.id === 'stellarKey') {
+            const isValid = this.validateStellarKey(value);
+            container.classList.add(isValid ? 'validated' : 'compromised');
+        }
+    }
+
+    validateStellarIdentity(identity) {
+        // 星际标识验证：可以是邮箱或用户名
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+        return emailRegex.test(identity) || usernameRegex.test(identity);
+    }
+
+    validateStellarKey(key) {
+        // 星际密钥验证：至少8位，包含字母和数字
+        const hasLetter = /[a-zA-Z]/.test(key);
+        const hasNumber = /\d/.test(key);
+        return key.length >= 8 && hasLetter && hasNumber;
+    }
+
+    // 涟漪系统
+    initRippleSystem() {
+        const buttons = document.querySelectorAll('.warp-button, .connection-portal, .gateway-link');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                this.createStellarRipple(e);
+            });
+        });
+    }
+
+    createStellarRipple(event) {
+        const button = event.currentTarget;
+        const ripple = document.createElement('span');
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+        
+        ripple.style.width = ripple.style.height = `${diameter}px`;
+        ripple.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+        ripple.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+        ripple.classList.add('stellar-ripple');
+        
+        const existingRipple = button.getElementsByClassName('stellar-ripple')[0];
+        if (existingRipple) {
+            existingRipple.remove();
+        }
+        
+        button.appendChild(ripple);
+    }
+
+    // 连接门户
+    initConnectionPortals() {
+        const portals = {
+            cosmicWechat: '星云通讯',
+            cosmicQQ: '量子通讯', 
+            cosmicWeibo: '星际广播'
+        };
+        
+        Object.keys(portals).forEach(portalId => {
+            const portal = document.getElementById(portalId);
+            
+            portal.addEventListener('click', (e) => {
+                const portalName = portals[portalId];
+                this.sendMessage(`正在连接到${portalName}...`, 'info');
+                
+                // 模拟连接状态
+                portal.innerHTML = `
+                    <div class="stellar-loading">
+                        <div class="loading-star"></div>
+                        <div class="loading-star"></div>
+                        <div class="loading-star"></div>
+                    </div>
+                `;
+                
+                // 模拟连接过程
+                setTimeout(() => {
+                    this.sendMessage(`${portalName}连接成功！`, 'success');
+                    this.resetConnectionPortal(portal, portalId, portalName);
+                }, 2000);
+            });
+        });
+    }
+
+    resetConnectionPortal(portal, portalId, portalName) {
+        const icons = {
+            cosmicWechat: '<i class="fab fa-weixin"></i>',
+            cosmicQQ: '<i class="fab fa-qq"></i>',
+            cosmicWeibo: '<i class="fab fa-weibo"></i>'
+        };
+        
+        portal.innerHTML = `
+            <div class="portal-icon">
+                ${icons[portalId]}
+            </div>
+            <div class="portal-name">${portalName}</div>
+        `;
+    }
+
+    // 星际跃迁提交
+    initStellarSubmission() {
+        const form = document.getElementById('stellarForm');
+        const warpButton = document.getElementById('warpButton');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // 验证表单
+            const isValid = this.validateStellarForm();
+            if (!isValid) return;
+            
+            // 显示跃迁状态
+            warpButton.innerHTML = `
+                <div class="warp-content">
+                    <div class="stellar-loading">
+                        <div class="loading-star"></div>
+                        <div class="loading-star"></div>
+                        <div class="loading-star"></div>
+                    </div>
+                    <span style="margin-left: 12px;">跃迁准备中...</span>
+                </div>
+            `;
+            warpButton.disabled = true;
+            
+            // 模拟星际跃迁过程
+            setTimeout(() => {
+                const identity = document.getElementById('stellarIdentity').value;
+                
+                // 跃迁成功
+                warpButton.innerHTML = `
+                    <div class="warp-content">
+                        <i class="fas fa-check"></i>
+                        <span>跃迁成功！</span>
+                    </div>
+                `;
+                warpButton.classList.add('pulsar-success');
+                this.sendMessage(`欢迎归来，星际行者 ${identity}！`, 'success');
+                // 模拟跳转
+setTimeout(() => {
+    this.sendMessage('正在前往天际樊星...', 'info');
+    // 实际跳转
+    window.location.href = './index.html';
+}, 2000);
+                
+            }, 2500);
+        });
+    }
+
+    validateStellarForm() {
+        const identity = document.getElementById('stellarIdentity').value.trim();
+        const key = document.getElementById('stellarKey').value.trim();
+        
+        let isValid = true;
+        
+        // 验证星际标识
+        if (!identity) {
+            this.showStellarError('stellarIdentity', '请输入星际标识');
+            isValid = false;
+        } else if (!this.validateStellarIdentity(identity)) {
+            this.showStellarError('stellarIdentity', '标识格式错误：邮箱或3-20位用户名');
+            isValid = false;
+        }
+        
+        // 验证星际密钥
+        if (!key) {
+            this.showStellarError('stellarKey', '请输入星际密钥');
+            isValid = false;
+        } else if (!this.validateStellarKey(key)) {
+            this.showStellarError('stellarKey', '密钥需至少8位，包含字母和数字');
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+
+    showStellarError(inputId, message) {
+        const input = document.getElementById(inputId);
+        const container = input.parentElement;
+        
+        // 添加错误动画
+        container.classList.add('quantum-error');
+        setTimeout(() => container.classList.remove('quantum-error'), 500);
+        
+        // 发送错误消息
+        this.sendMessage(message, 'error');
+    }
+
+    // 星际动画
+    initCosmicAnimations() {
+        // 观察器用于滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('cosmic-visible');
+                }
+            });
+        }, observerOptions);
+        
+        // 观察所有可动画元素
+        document.querySelectorAll('.cosmic-fade-in').forEach(el => observer.observe(el));
+    }
+
+    // 星际消息系统
+    initMessageSystem() {
+        this.messageContainer = document.getElementById('stellarMessages');
+    }
+
+    sendMessage(content, type = 'info') {
+        const message = document.createElement('div');
+        message.className = `stellar-message ${type}`;
+        
+        const icon = type === 'success' ? 'check-circle' : 
+                     type === 'error' ? 'exclamation-circle' : 'info-circle';
+        
+        message.innerHTML = `
+            <div class="message-icon">
+                <i class="fas fa-${icon}"></i>
+            </div>
+            <div class="message-content">${content}</div>
+            <button class="message-close">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        this.messageContainer.appendChild(message);
+        
+        // 显示消息
+        setTimeout(() => message.classList.add('active'), 10);
+        
+        // 关闭按钮
+        message.querySelector('.message-close').addEventListener('click', () => {
+            message.classList.remove('active');
+            setTimeout(() => message.remove(), 400);
+        });
+        
+        // 自动消失
+        setTimeout(() => {
+            if (message.parentNode) {
+                message.classList.remove('active');
+                setTimeout(() => {
+                    if (message.parentNode) message.remove();
+                }, 400);
+            }
+        }, 5000);
+        
+        // 限制最大消息数量
+        if (this.messageContainer.children.length > 5) {
+            const oldestMessage = this.messageContainer.children[0];
+            oldestMessage.classList.remove('active');
+            setTimeout(() => {
+                if (oldestMessage.parentNode) oldestMessage.remove();
+            }, 400);
+        }
+    }
+
+    // 星际工具方法
+    generateStellarPattern() {
+        // 生成随机星际图案
+        const patterns = ['✨', '🌟', '⭐', '💫', '☄️', '🌌', '🪐', '🚀'];
+        return patterns[Math.floor(Math.random() * patterns.length)];
+    }
+}
+
+// 初始化星际门户
+document.addEventListener('DOMContentLoaded', () => {
+    window.stellarPortal = new StellarPortal();
+    
+    // 添加星际入场动画
+    document.querySelectorAll('.cosmic-fade-in').forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.1}s`;
+    });
+    
+    // 添加欢迎消息
+    setTimeout(() => {
+        window.stellarPortal.sendMessage('欢迎来到天际樊星门户系统', 'info');
+    }, 1000);
+    
+    // 添加星空点击效果
+    document.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BODY') {
+            const star = document.createElement('div');
+            star.innerHTML = window.stellarPortal.generateStellarPattern();
+            star.style.position = 'fixed';
+            star.style.left = `${e.clientX}px`;
+            star.style.top = `${e.clientY}px`;
+            star.style.fontSize = '24px';
+            star.style.pointerEvents = 'none';
+            star.style.zIndex = '1';
+            star.style.animation = 'nebulaFloat 1.5s ease-out forwards';
+            
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 1500);
+        }
+    });
+});
+</script>
+</body>
+</html>

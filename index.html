@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樊振东-从紫微星到超级全满贯</title>
+    <link rel="shortcut icon" href="./SVG/fujian.svg">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <style>
+        /* 全局色调体系：更深的藏蓝+更亮的鎏金 */
+        :root {
+            --primary-navy: #081C58;    /* 主色：更深的藏蓝 */
+            --primary-gold: #EFC848;    /* 主点缀：更亮的鎏金 */
+            --light-gold: #F8D768;      /* 次点缀：超亮鎏金 */
+            --dark-bg: #051038;         /* 全局背景：极致深的藏蓝 */
+            --overlay-bg: rgba(5, 16, 56, 0.8); /* 轮播遮罩 */
+            --text-white: #F8F9FC;      /* 基础白字 */
+            --text-gray: rgba(248, 249, 252, 0.8); /* 浅灰字 */
+            --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 导航栏阴影 */
+            /* ====== 新增颜色变量 ====== */
+            --dark-gold: #D4A732;            /* 深金色 - 悬停状态 */
+            --light-navy: #0f245e;           /* 浅藏蓝 - 卡片背景 */
+            --accent-red: #D62828;           /* 中国红 - 特别强调 */
+            --disabled-gray: rgba(248, 249, 252, 0.6); /* 禁用状态文字 */
+            
+            /* ====== 新增交互状态 ====== */
+            --hover-gold: #F8D768;
+            --active-gold: #D4A732;
+            --button-bg-hover: rgba(239, 200, 72, 0.1);
+            --link-hover-color: var(--light-gold);
+            
+            /* ====== 新增阴影效果 ====== */
+            --gold-glow: 0 0 15px rgba(239, 200, 72, 0.4);
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --card-glow: 0 0 0 1px rgba(239, 200, 72, 0.15);
+            --nav-shadow-strong: 0 4px 20px rgba(0, 0, 0, 0.4);
+            
+            /* ====== 新增渐变 ====== */
+            --medal-gradient: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 100%);
+            --navy-gradient: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+        }
+
+        /* 全局样式重置+背景 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body.dark_theme {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            min-height: 100vh;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+
+        /* 导航栏样式（保持不变） */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: rgba(8, 28, 88, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(239, 200, 72, 0.3);
+            box-shadow:  var(--nav-shadow-strong);
+            padding: 0.8rem 0;
+        }
+
+        .header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .big-logo {
+            margin: 0;
+        }
+
+        .big-logo a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+
+        .big-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .big-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background-color: rgba(239, 200, 72, 0.2);
+            color: var(--light-gold);
+        }
+
+        /* 汉堡菜单按钮 */
+        .nav-toggle-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .nav-toggle-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-white);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background-color: var(--light-gold);
+        }
+
+        .nav-toggle-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background-color: var(--light-gold);
+        }
+
+        /* 导航菜单 */
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-link {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-link:hover {
+            color: var(--light-gold) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .navbar-link.color {
+            color: var(--primary-gold) !important;
+            font-weight: 700;
+        }
+
+        .navbar-link.color::after {
+            width: 100%;
+            background-color: var(--primary-gold);
+        }
+
+        /* 移动端导航适配 */
+        @media (max-width: 768px) {
+            .nav-toggle-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 0;
+                height: 100vh;
+                background-color: var(--primary-navy);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                overflow: hidden;
+                transition: width 0.4s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .navbar.active {
+                width: 80%;
+            }
+
+            .navbar-list {
+                flex-direction: column;
+                gap: 2rem;
+                width: 100%;
+            }
+
+            .navbar-link {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                display: block;
+                width: 100%;
+            }
+
+            .header .container {
+                padding: 0 1rem;
+            }
+
+            .big-logo a {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ================ 新版高级轮播图样式 ================ */
+        .slider-section {
+            padding: 0;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 70px;
+            perspective: 2000px;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+        }
+        
+        /* 3D轮播容器 */
+        .slider-container-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        /* 3D幻灯片 */
+        .slide-3d {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 85%;
+            height: 75%;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                        opacity 0.8s ease,
+                        z-index 0.5s ease;
+            transform-origin: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        /* 幻灯片背景图 */
+        .slide-bg-3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            transition: transform 8s ease;
+        }
+        
+        .slide-3d.active .slide-bg-3d {
+            transform: scale(1);
+        }
+        
+        
+        /* 激活状态的3D幻灯片 */
+        .slide-3d.active {
+            transform: translate(-50%, -50%) rotateY(0deg) scale(1);
+            z-index: 10;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(239, 200, 72, 0.3);
+        }
+        
+        /* 左侧卡片 */
+        .slide-3d.prev {
+            transform: translate(-120%, -50%) rotateY(45deg) scale(0.85);
+            opacity: 0.7;
+            z-index: 3;
+        }
+        
+        /* 右侧卡片 */
+        .slide-3d.next {
+            transform: translate(20%, -50%) rotateY(-45deg) scale(0.85);
+            opacity: 0.7;
+            z-index: 3;
+        }
+        
+        /* 更远的卡片 */
+        .slide-3d.far {
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        /* 内容区域 */
+        .slide-content-3d {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            text-align: left;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .slide-subtitle-3d {
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(239, 200, 72, 0.1);
+            border-radius: 30px;
+            border: 1px solid rgba(239, 200, 72, 0.3);
+        }
+        
+        .slide-title-3d {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: var(--text-white);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .slide-title-3d span {
+            color: var(--primary-gold);
+            display: block;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .slide-title-3d span::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--medal-gradient);
+            border-radius: 2px;
+        }
+        
+        .slide-text-3d {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-bottom: 40px;
+            color: var(--text-gray);
+            background: rgba(248, 249, 252, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-gold);
+        }
+        
+        /* 高级按钮样式 */
+        .slide-button-3d {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--primary-gold);
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .slide-button-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(239, 200, 72, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+        
+        .slide-button-3d:hover {
+            background: rgba(239, 200, 72, 0.1);
+            color: var(--light-gold);
+            border-color: var(--light-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(239, 200, 72, 0.3);
+        }
+        
+        .slide-button-3d:hover::before {
+            left: 100%;
+        }
+        
+        /* 高级导航控件 */
+        .slider-nav-3d {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            flex-direction: column;
+        }
+        
+        .slider-dots-3d {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .slider-dot-3d {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: rgba(248, 249, 252, 0.2);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slider-dot-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--medal-gradient);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .slider-dot-3d.active {
+            border-color: var(--primary-gold);
+            transform: scale(1.2);
+        }
+        
+        .slider-dot-3d.active::before {
+            transform: scale(1);
+        }
+        
+        .slider-dot-3d:hover::before {
+            transform: scale(0.5);
+        }
+        
+        /* 高级箭头导航 */
+        .slider-arrows-3d {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+            transform: translateY(-50%);
+            z-index: 20;
+        }
+        
+        .slider-arrow-3d {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: rgba(8, 28, 88, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(239, 200, 72, 0.3);
+        }
+        
+        .slider-arrow-3d:hover {
+            background-color: rgba(239, 200, 72, 0.9);
+            color: var(--primary-navy);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(239, 200, 72, 0.5);
+            border-color: transparent;
+        }
+        
+        /* 进度条指示器 */
+        .slider-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(248, 249, 252, 0.1);
+            z-index: 20;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--medal-gradient);
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            .slide-title-3d {
+                font-size: 3rem;
+            }
+            .slide-3d {
+                width: 90%;
+                height: 70%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .slide-title-3d {
+                font-size: 2.5rem;
+            }
+            .slide-text-3d {
+                font-size: 1.1rem;
+            }
+            .slider-section {
+                height: 90vh;
+                margin-top: 65px;
+            }
+            .slide-3d {
+                width: 95%;
+                height: 65%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-title-3d {
+                font-size: 2rem;
+            }
+            .slide-text-3d {
+                font-size: 1rem;
+            }
+            .slide-content-3d {
+                padding: 20px;
+                text-align: center;
+            }
+            .slider-arrows-3d {
+                padding: 0 20px;
+            }
+            .slider-arrow-3d {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+            .slider-section {
+                height: 85vh;
+                margin-top: 60px;
+            }
+            .slide-3d {
+                width: 100%;
+                height: 60%;
+                border-radius: 10px;
+            }
+            .slide-button-3d {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .slide-title-3d {
+                font-size: 1.8rem;
+            }
+            .slide-subtitle-3d {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+            .slider-section {
+                height: 80vh;
+            }
+            .slide-3d {
+                height: 55%;
+            }
+        }
+
+        /* ================ 以下是您原有的其他样式（保持不变） ================ */
+        
+        /* 计数器样式 */
+        .counter-container {
+            display: flex;
+            gap: 50px;
+            margin-top: 40px;
+        }
+        
+        .counter-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .counter-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--light-gold);
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(248, 215, 104, 0.5);
+        }
+        
+        .counter-label {
+            font-size: 1rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* 基础重置 */
+        .section {
+            padding: 60px 0;
+            width: 100%;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 板块大标题 */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin: 0 10px;
+            display: inline-block;
+        }
+        .title-decoration {
+            vertical-align: middle;
+            height: 30px;
+            width: auto;
+        }
+
+        /* 板块简介文字 */
+        .section-text {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        /* 网格列表 */
+        .grid-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* 卡片容器 */
+        .recommend-2-card {
+            background: linear-gradient(135deg, rgba(8, 28, 88, 0.2), rgba(5, 16, 56, 0.3));
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .recommend-2-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary-gold);
+        }
+
+        .recommend-2-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--medal-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .recommend-2-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 优化卡片标题颜色 */
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin: 0 5px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--medal-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .recommend-2-card:hover .card-title::after {
+            width: 100%;
+        }
+
+        /* 优化按钮样式 */
+        .button {
+            background: transparent;
+            color: var(--text-white);
+            border: 2px solid var(--primary-gold);
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            background: var(--button-bg-hover);
+            color: var(--light-gold);
+            border-color: var(--light-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 200, 72, 0.2);
+        }
+
+        /* 图片容器 */
+        .img-holder {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: calc(var(--height) / var(--width) * 100%);
+        }
+        
+        .img-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 卡片文字内容区 */
+        .card-content {
+            padding: 25px;
+            text-align: center;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin: 0 5px;
+            display: inline-block;
+        }
+        .card-text {
+            font-size: 1rem;
+            color: var(--text-white);
+            line-height: 1.7;
+            margin: 20px 0;
+        }
+
+        .button {
+            background: rgba(8, 28, 88, 0.2);
+            color: var(--text-white);
+            border: 2px solid var(--primary-gold);
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        
+        /* 个人简介板块样式 */
+        .profile-section {
+            padding: 80px 0;
+        }
+
+        .profile-card {
+            background: linear-gradient(135deg, rgba(15, 36, 94, 0.3), rgba(5, 16, 56, 0.4));
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            position: relative;
+            padding: 30px 20px;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), var(--gold-glow);
+            border-color: var(--light-gold);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--medal-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-card:hover::before {
+            opacity: 1;
+        }
+
+        .zoom-text {
+            font-weight: 700;
+            color: var(--light-gold);
+            transition: transform 0.3s ease;
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        .zoom-text:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px rgba(248, 215, 104, 0.6);
+        }
+
+        .card-profile-text {
+            font-size: 1rem;
+            color: var(--text-white);
+            line-height: 1.8;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover .card-profile-text {
+            transform: scale(1.02);
+        }
+
+        .button:hover {
+            background: rgba(239, 200, 72, 0.2);
+            color: var(--light-gold);
+            border-color: var(--light-gold);
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                padding: 60px 0;
+            }
+            .profile-card {
+                padding: 25px 15px;
+            }
+            .zoom-text:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .grid-list {
+                grid-template-columns: 1fr;
+            }
+            .card-content {
+                padding: 20px;
+            }
+        }
+
+        /* 页脚基础样式 */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+            color: var(--text-gray);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(239, 200, 72, 0.3);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-white);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .footer-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .footer-slogan {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-gray);
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: rgba(248, 249, 252, 0.6);
+        }
+
+        .footer-nav-title {
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .footer-nav-list {
+            list-style: none;
+        }
+
+        .footer-nav-link {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-nav-link:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon i {
+            color: var(--primary-gold);
+            margin-right: 10px;
+            font-style: normal;
+        }
+
+        .social-icon:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding: 20px 20px 0;
+            border-top: 1px solid rgba(239, 200, 72, 0.15);
+        }
+
+        .footer-disclaimer {
+            font-size: 0.85rem;
+            color: rgba(248, 249, 252, 0.5);
+            text-align: center;
+            padding-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-container {
+                gap: 30px;
+            }
+
+            .footer-logo {
+                font-size: 1.5rem;
+            }
+
+            .footer-nav-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark_theme">
+
+    <!-- 头部导航栏（保持不变） -->
+    <header class="header" data-header>
+        <div class="container">
+            <h1 class="h1 big-logo">
+                <a href="./index.html"><span>樊振东·超级金满贯</span></a>
+            </h1>
+
+            <div class="navbar-actions">
+                <button class="theme-btn" data-theme-btn>
+                    <span class="icon">⭐⭐⭐</span>
+                </button>
+            </div>
+
+            <button class="nav-toggle-btn" data-nav-toggle-btn>
+                <span class="one"></span>
+                <span class="two"></span>
+                <span class="three"></span>
+            </button>
+
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="index.html" class="navbar-link color">首页</a>
+                    </li>
+                    <li>
+                        <a href="./职业生涯.html"  class="navbar-link">职业生涯</a>
+                    </li>
+                    <li>
+                        <a href="./荣誉成就.html" class="navbar-link">荣誉成就</a>
+                    </li>
+					<li>
+                        <a href="./精神品质.html" class="navbar-link">精神品质</a>
+                    </li>
+                    <li>
+                        <a href="./赛场风采.html" class="navbar-link">赛场风采</a>
+                    </li>
+                    <li>
+                        <a href="./最新消息.html" class="navbar-link">最新消息</a>
+                    </li>
+                    <li>
+                        <a href="./联系我们.html" class="navbar-link">联系我们</a>
+                    </li>
+					<li>
+                        <a href="./Login.html" class="navbar-link">登录</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================ 新版高级轮播图 ================ -->
+    <main>
+        <article>
+            <section class="slider-section">
+                <!-- 3D轮播容器 -->
+                <div class="slider-container-3d" id="slider3D">
+                    <!-- 幻灯片1 -->
+                    <div class="slide-3d active" data-slide="0">
+                        <img src="./照片集/巴黎颁奖.png" alt="超级全满贯" class="slide-bg-3d">
+                        <div class="slide-overlay-3d"></div>
+                        <div class="slide-content-3d">
+                            <div class="slide-subtitle-3d">职业生涯里程碑</div>
+                            <h1 class="slide-title-3d">超级全满贯<br><span>从天才少年到乒坛传奇</span></h1>
+                            <p class="slide-text-3d">
+                                樊振东凭借超强的天赋和不懈的努力，实现奥运会、世乒赛、世界杯、亚运会、亚锦赛、亚洲杯、全运会、全锦赛、ITTF总决赛等重大赛事全满贯，成为乒坛第10位大满贯。
+                            </p>
+                            <button class="slide-button-3d" data-link="./职业生涯.html">查看职业生涯</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 幻灯片2 -->
+                    <div class="slide-3d" data-slide="1">
+                        <img src="./照片集/巴黎四分之一战胜张本智和.jpg" class="slide-bg-3d" alt="巴黎奥运会四分之一决赛">
+                        <div class="slide-overlay-3d"></div>
+                        <div class="slide-content-3d">
+                            <div class="slide-subtitle-3d">2024年巴黎奥运会</div>
+                            <h1 class="slide-title-3d">奥运双冠王<br><span>男单金牌 男团金牌</span></h1>
+                            <p class="slide-text-3d">
+                                2024年巴黎奥运会，樊振东顶住压力以绝对实力夺得男单冠军，搭档队友斩获男团金牌，圆满实现奥运男单金牌梦想。
+                            </p>
+                            <button class="slide-button-3d" data-link="./荣誉成就.html">查看荣誉成就</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 幻灯片3 -->
+                    <div class="slide-3d" data-slide="2">
+                        <img src="./照片集/全运会夺冠.png" class="slide-bg-3d" alt="全运会夺冠">
+                        <div class="slide-overlay-3d"></div>
+                        <div class="slide-content-3d">
+                            <div class="slide-subtitle-3d">全运赛场统治力</div>
+                            <h1 class="slide-title-3d">全运会卫冕<br><span>连续两届男单冠军</span></h1>
+                            <p class="slide-text-3d">
+                                樊振东在全运会赛场上展现绝对实力，连续两届斩获男单冠军，成为全运乒乓史上的传奇人物。
+                            </p>
+                            <button class="slide-button-3d" data-link="./赛场风采.html">查看赛场风采</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 幻灯片4 -->
+                    <div class="slide-3d" data-slide="3">
+                        <img src="./照片集/德甲.png" class="slide-bg-3d" alt="加盟德甲俱乐部">
+                        <div class="slide-overlay-3d"></div>
+                        <div class="slide-content-3d">
+                            <div class="slide-subtitle-3d">国际赛场新征程</div>
+                            <h1 class="slide-title-3d">征战欧洲<br><span>加盟德甲萨尔布吕肯俱乐部</span></h1>
+                            <p class="slide-text-3d">
+                                2025年，樊振东正式加盟德甲萨尔布吕肯俱乐部，走出国门征战欧洲联赛，开启职业生涯新篇章。
+                            </p>
+                            <button class="slide-button-3d" data-link="./最新消息.html">查看最新消息</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 高级箭头导航 -->
+                    <div class="slider-arrows-3d">
+                        <div class="slider-arrow-3d prev-slide-3d">
+                            ‹
+                        </div>
+                        <div class="slider-arrow-3d next-slide-3d">
+                            ›
+                        </div>
+                    </div>
+                    
+                    <!-- 高级指示点 -->
+                    <div class="slider-nav-3d">
+                        <div class="slider-dots-3d">
+                            <div class="slider-dot-3d active" data-slide="0"></div>
+                            <div class="slider-dot-3d" data-slide="1"></div>
+                            <div class="slider-dot-3d" data-slide="2"></div>
+                            <div class="slider-dot-3d" data-slide="3"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 进度条 -->
+                    <div class="slider-progress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <script>
+        // 导航栏交互逻辑（保持不变）
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggleBtn = document.querySelector('[data-nav-toggle-btn]');
+            const navbar = document.querySelector('[data-navbar]');
+            
+            navToggleBtn.addEventListener('click', function() {
+                navToggleBtn.classList.toggle('active');
+                navbar.classList.toggle('active');
+                document.body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            const navbarLinks = document.querySelectorAll('.navbar-link');
+            navbarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        navToggleBtn.classList.remove('active');
+                        navbar.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+            
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navToggleBtn.classList.remove('active');
+                    navbar.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // ================ 新版高级3D轮播功能 ================
+            const slides3D = document.querySelectorAll('.slide-3d');
+            const dots3D = document.querySelectorAll('.slider-dot-3d');
+            const prevBtn3D = document.querySelector('.prev-slide-3d');
+            const nextBtn3D = document.querySelector('.next-slide-3d');
+            const progressBar = document.getElementById('progressBar');
+            let currentSlide3D = 0;
+            let slideInterval3D;
+            let isAnimating = false;
+            
+            // 显示指定幻灯片
+            function showSlide3D(index, direction = 'next') {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                // 计算新索引
+                let newIndex = index;
+                if (newIndex < 0) newIndex = slides3D.length - 1;
+                if (newIndex >= slides3D.length) newIndex = 0;
+                
+                // 移除所有状态类
+                slides3D.forEach(slide => {
+                    slide.classList.remove('active', 'prev', 'next', 'far');
+                });
+                dots3D.forEach(dot => dot.classList.remove('active'));
+                
+                // 设置当前幻灯片
+                slides3D[newIndex].classList.add('active');
+                dots3D[newIndex].classList.add('active');
+                
+                // 设置前后幻灯片
+                const prevIndex = (newIndex - 1 + slides3D.length) % slides3D.length;
+                const nextIndex = (newIndex + 1) % slides3D.length;
+                const farPrevIndex = (newIndex - 2 + slides3D.length) % slides3D.length;
+                const farNextIndex = (newIndex + 2) % slides3D.length;
+                
+                slides3D[prevIndex].classList.add('prev');
+                slides3D[nextIndex].classList.add('next');
+                slides3D[farPrevIndex].classList.add('far');
+                slides3D[farNextIndex].classList.add('far');
+                
+                // 更新当前幻灯片索引
+                currentSlide3D = newIndex;
+                
+                // 重置进度条
+                progressBar.style.width = '0%';
+                
+                // 动画结束后重置标志
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 800);
+                
+                resetAutoSlide3D();
+            }
+            
+            // 上一张
+            function prevSlide3D() {
+                showSlide3D(currentSlide3D - 1, 'prev');
+            }
+            
+            // 下一张
+            function nextSlide3D() {
+                showSlide3D(currentSlide3D + 1, 'next');
+            }
+            
+            // 自动轮播
+            function startAutoSlide3D() {
+                let progress = 0;
+                const interval = 50;
+                const duration = 5000;
+                const increment = (interval / duration) * 100;
+                
+                slideInterval3D = setInterval(() => {
+                    progress += increment;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        nextSlide3D();
+                    }
+                }, interval);
+            }
+            
+            // 重置自动轮播
+            function resetAutoSlide3D() {
+                clearInterval(slideInterval3D);
+                startAutoSlide3D();
+            }
+            
+            // 初始化轮播
+            function initSlider3D() {
+                // 初始设置
+                showSlide3D(0);
+                startAutoSlide3D();
+                
+                // 绑定指示点点击事件
+                dots3D.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        showSlide3D(index);
+                    });
+                });
+                
+                // 绑定箭头点击事件
+                prevBtn3D.addEventListener('click', prevSlide3D);
+                nextBtn3D.addEventListener('click', nextSlide3D);
+                
+                // 轮播按钮跳转功能
+                const slideButtons3D = document.querySelectorAll('.slide-button-3d');
+                slideButtons3D.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const link = this.dataset.link;
+                        if (link) window.location.href = link;
+                    });
+                });
+                
+                // 添加键盘控制
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') prevSlide3D();
+                    if (e.key === 'ArrowRight') nextSlide3D();
+                });
+                
+                // 添加触摸滑动支持
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                const sliderContainer = document.querySelector('.slider-container-3d');
+                
+                sliderContainer.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                
+                sliderContainer.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                });
+                
+                function handleSwipe() {
+                    const swipeThreshold = 50;
+                    const diff = touchStartX - touchEndX;
+                    
+                    if (Math.abs(diff) > swipeThreshold) {
+                        if (diff > 0) {
+                            nextSlide3D();
+                        } else {
+                            prevSlide3D();
+                        }
+                    }
+                }
+            }
+            
+            // 启动轮播
+            initSlider3D();
+        });
+    </script>
+    
+    <!-- ================ 以下是您原有的其他内容（完全不变） ================ -->
+    
+    <!-- 个人简介板块 -->
+    <section class="section profile-section text-center">
+        <div class="container">
+            <!-- 板块标题 -->
+            <div style="margin-bottom: 30px;">
+                <h2 class="h2 section-title">樊振东 · 个人简介</h2>
+            </div>
+            <!-- 板块简介 -->
+            <p class="section-text">
+                樊振东，1997年1月22日生于广东省广州市，祖籍湖南省衡阳市祁东县，中国乒乓球运动员，国际级运动健将，上海市青联常委、体育界别副主任。2012年2月进入国家二队，2012年10月进入国家一队。以暴力的反手技术和顽强的赛场意志著称，是新时代乒坛"暴力美学"的代表人物。
+            </p>
+            <!-- 简介卡片列表 -->
+            <ul class="grid-list">
+                <!-- 卡片1：打法特点 -->
+                <li>
+                    <div class="profile-card">
+                        <div class="card-content">
+                            <img class="title-decoration" src="./照片集/樊A球拍.png" alt="">
+                            <h3 class="h3 card-title">打法特点 · 暴力反手</h3>
+                            <p class="card-profile-text">
+                                樊振东采用<span class="zoom-text">横板弧圈结合快攻打法</span>，反手技术堪称"世界第一"——反手拧拉爆发力极强，单板质量高，相持中能连续暴力输出；正手弧圈球旋转强劲，近台快撕、中远台反拉能力顶尖，整体打法兼具力量与速度，被球迷称为"小胖"的他，用"暴力美学"征服赛场。
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <!-- 卡片2：赛场精神 -->
+                <li>
+                    <div class="profile-card">
+                        <div class="card-content">
+                            <img class="title-decoration" src="./照片集/金牌.png" alt="">
+                            <h3 class="h3 card-title">赛场精神 · 坚韧不拔</h3>
+                            <p class="card-profile-text">
+                                从里约P卡的蛰伏，到东京银牌的遗憾，再到巴黎登顶的辉煌，樊振东始终秉持<span class="zoom-text">"永不言弃、愈挫愈勇"</span>的精神。面对逆风球从不慌乱，面对强敌敢于亮剑，他用一次次拼杀诠释了国乒"顽强拼搏、永不言败"的核心精神，成为年轻一代运动员的榜样。
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <!-- 卡片3：职业特质 -->
+                <li>
+                    <div class="profile-card">
+                        <div class="card-content">
+                            <img class="title-decoration" src="./照片集/奖杯.png" alt="">
+                            <h3 class="h3 card-title">职业特质 · 沉稳成长</h3>
+                            <p class="card-profile-text">
+                                年少成名却不骄不躁，樊振东始终保持<span class="zoom-text">"空杯心态"</span>，不断打磨技术细节、完善战术体系。从依赖暴力进攻到"技术+战术+心态"全面成熟，他的成长轨迹印证了天才源于勤奋，也让他成为世界乒乓球历史上极具统治力的超级全满贯选手，更是新时代乒坛技术革新与精神传承的双重标杆。
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 奥运记忆板块 -->
+    <section class="section recommend-2 text-center">
+        <div class="container">
+            <!-- 板块大标题 -->
+            <div style="margin-bottom: 30px;">
+                <img class="title-decoration" src="./照片集/里约开幕式.png" alt="标题左装饰">
+                <h2 class="h2 section-title">樊振东 · 奥运记忆</h2>
+                <img class="title-decoration" src="./照片集/巴黎开幕式.png" alt="标题右装饰">
+            </div>
+            <!-- 板块简介 -->
+            <p class="section-text">
+                循此苦旅，以达天际。从2016年的里约奥运会到2024年的巴黎奥运会，樊振东穿越一个又一个周期，成为强者，抵达圆满！
+            </p>
+            <!-- 卡片网格列表 -->
+            <ul class="grid-list">
+                <!-- 卡片1 -->
+                <li>
+                    <div class="recommend-2-card">
+                        <div class="card-banner img-holder" style="--width: 500; --height: 550;">
+                            <img src="./照片集/里约.png" class="img-cover" alt="里约奥运会">
+                        </div>
+                        <div class="card-content">
+                            <img class="title-decoration" src="./照片集/里约乒乓球桌.png" alt="">
+                            <h3 class="h3 card-title">看台之上，锋芒初藏</h3>
+                            <p class="card-text">
+                                2016年里约奥运，19岁的樊振东已是世界第二，却只能以P卡选手的身份出征。年轻的他在观众席怀揣梦想，为代表中国队上场的"三剑客"——马龙、张继科、许昕加油。眼神中透露着对未来的渴望与坚定。
+                            </p>
+                            <button class="button">2016年里约奥运会</button>
+                        </div>
+                    </div>
+                </li>
+                <!-- 卡片2 -->
+                <li>
+                    <div class="recommend-2-card">
+                        <div class="card-banner img-holder" style="--width: 500; --height: 550;">
+                            <img src="./照片集/东京.png" class="img-cover"  alt="东京奥运会 ">
+                        </div>
+                        <div class="card-content">
+                            <img class="title-decoration" src="./照片集/东京乒乓球桌.png" alt="">
+                            <h3 class="h3 card-title">银鞍照白马，淬火再前行</h3>
+                            <p class="card-text">
+                                2021年东京奥运，24岁的樊振东已然成为国乒绝对主力，却在男单决赛憾负马龙，收获银牌。但遗憾从不是终点，而是淬炼锋芒的烈火。他把银牌化作铠甲，向着更高的目标发起更猛的冲击。
+                            </p>
+                            <button class="button">2021年东京奥运会</button>
+                        </div>
+                    </div>
+                </li>
+                <!-- 卡片3 -->
+                <li>
+                    <div class="recommend-2-card">
+                        <div class="card-banner img-holder" style="--width: 500; --height: 550;">
+                            <img src="./照片集/巴黎夺冠.jpg" class="img-cover" alt="巴黎奥运会">
+                        </div>
+                        <div class="card-content">
+                            <img class="title-decoration" src="./照片集/巴黎乒乓球桌.png" alt="">
+                            <h3 class="h3 card-title">绝境破局，加冕全满贯</h3>
+                            <p class="card-text">
+                                2024年巴黎奥运会，27岁的樊振东迎来队友王楚钦意外一轮游的终极考验，他独自扛起半区重担，以雷霆之势横扫赛场，最终豪取男单、男团双冠，登顶超级全满贯！成为世界乒坛历史上第六位男子大满贯。
+                            </p>
+                            <button class="button">2024年巴黎奥运会</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- 品牌信息区 -->
+            <div class="footer-brand">
+                <div class="brand-header">
+                    <h3 class="footer-logo">
+                        樊振东· 乒坛传奇
+                    </h3>
+                    <div class="footer-line"></div>
+                </div>
+                <div class="slogan-container">
+                    <p class="footer-slogan">十年磨剑，以梦为马；乒坛逐光，铸就传奇</p>
+                    <p class="footer-slogan">大雪压青松，青松挺且直。</p>
+                    <p class="footer-slogan">要知松高洁，待到雪化时！</p>
+                </div>
+            </div>
+            
+            <!-- 导航和版权区域 -->
+            <div class="footer-bottom-section">
+                <!-- 单行导航 -->
+                <div class="footer-nav-container">
+                    <h4 class="footer-nav-title">快速导航</h4>
+                    <ul class="footer-nav-list">
+                        <li><a href="./index.html" class="footer-nav-link">首页</a></li>
+                        <li><a href="./职业生涯.html" class="footer-nav-link">职业生涯</a></li>
+                        <li><a href="./荣誉成就.html" class="footer-nav-link">荣誉成就</a></li>
+						<li><a href="./精神品质.html" class="footer-nav-link">精神品质</a></li>
+                        <li><a href="./赛场风采.html" class="footer-nav-link">赛场风采</a></li>
+                        <li><a href="./最新消息.html" class="footer-nav-link">最新消息</a></li>
+                        <li><a href="./联系我们.html" class="footer-nav-link">联系我们</a></li>
+					
+                    </ul>
+                </div>
+                
+                <!-- 版权和祝福 -->
+                <div class="footer-legal">
+                    <p class="footer-copyright">
+                        &copy; 版权樊振东球迷Fantacia所有
+                    </p>
+                    <p class="footer-disclaimer">
+                        祝我们各自拥有美好的人生！
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 页脚样式（保持不变） -->
+    <style>
+    .footer {
+        background: linear-gradient(135deg, rgba(8, 28, 88, 0.95), rgba(5, 16, 56, 0.95));
+        color: #e0e0e0;
+        padding: 50px 0 30px;
+        font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(239, 200, 72, 0.8) 50%, 
+            transparent 100%);
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .footer-brand {
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .brand-header {
+        display: inline-block;
+        margin-bottom: 25px;
+    }
+
+    .footer-logo {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 15px 0;
+        background: linear-gradient(45deg, #EFC848, #ff9a00);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer-logo span {
+        font-size: 32px;
+        letter-spacing: 1px;
+    }
+
+    .footer-line {
+        height: 2px;
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(239, 200, 72, 0.6) 50%, 
+            transparent 100%);
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .slogan-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .footer-slogan {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.85);
+        position: relative;
+        padding: 0 20px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-slogan:first-child {
+        font-size: 18px;
+        color: #EFC848;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+    .footer-slogan:last-child {
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-bottom-section {
+        border-top: 1px solid rgba(239, 200, 72, 0.2);
+        padding-top: 30px;
+    }
+
+    .footer-nav-container {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .footer-nav-title {
+        color: #EFC848;
+        font-size: 18px;
+        margin: 0 0 15px 0;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .footer-nav-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-nav-link {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 5px 0;
+        position: relative;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .footer-nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #EFC848;
+        transition: width 0.3s ease;
+    }
+
+    .footer-nav-link:hover {
+        color: #EFC848;
+    }
+
+    .footer-nav-link:hover::after {
+        width: 100%;
+    }
+
+    .footer-legal {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-copyright {
+        margin: 0 0 10px 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-disclaimer {
+        margin: 0;
+        font-size: 15px;
+        color: rgba(239, 200, 72, 0.9);
+        font-weight: 500;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .footer {
+            padding: 40px 0 25px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+        }
+        
+        .footer-logo span {
+
+            font-size: 28px;
+        }
+        
+        .footer-slogan {
+            font-size: 15px;
+            padding: 0 15px;
+        }
+        
+        .footer-slogan:first-child {
+            font-size: 16px;
+        }
+        
+        .footer-nav-list {
+            gap: 15px 20px;
+        }
+        
+        .footer-nav-link {
+            font-size: 14px;
+        }
+        
+        .footer-nav-title {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .footer-nav-list {
+            gap: 12px 15px;
+        }
+        
+        .footer-nav-link {
+            font-size: 13px;
+        }
+        
+        .footer-container {
+            padding: 0 15px;
+        }
+        
+        .slogan-container {
+            gap: 8px;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .footer-brand,
+    .footer-nav-container,
+    .footer-legal {
+        animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .footer-nav-container {
+        animation-delay: 0.2s;
+    }
+
+    .footer-legal {
+        animation-delay: 0.4s;
+    }
+    </style>
+
+</body>
+</html>
