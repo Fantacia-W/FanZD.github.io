@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樊振东-从紫微星到超级全满贯</title>
+    <link rel="shortcut icon" href="../SVG/fujian.svg">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+/* 全局色调（与其他页面一致） */
+:root {
+    --primary-navy: #081C58;
+    --primary-gold: #EFC848;
+    --light-gold: #F8D768;
+    --dark-bg: #051038;
+    --text-white: #F8F9FC;
+    --text-gray: rgba(248, 249, 252, 0.8);
+    --gold-glow: 0 0 15px rgba(239, 200, 72, 0.4);
+    --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    --medal-gradient: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 100%);
+}
+
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.dark_theme {
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    min-height: 100vh;
+    font-family: "Microsoft Yahei", sans-serif;
+    padding-top: 120px; /* 避开导航栏 */
+    overflow-x: hidden;
+}
+
+/* 导航栏样式（当前页"联系我们"高亮） */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(8, 28, 88, 0.95), rgba(5, 16, 56, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(239, 200, 72, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    padding: 0.8rem 0;
+}
+
+.header .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.big-logo a {
+    text-decoration: none;
+    color: var(--text-white);
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.big-logo span {
+    color: var(--primary-gold);
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.big-logo span::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light-gold);
+    border-radius: 1px;
+}
+
+.theme-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    background-color: rgba(239, 200, 72, 0.2);
+    color: var(--light-gold);
+}
+
+.nav-toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.nav-toggle-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-white);
+    margin: 5px 0;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+    background-color: var(--light-gold);
+}
+
+.nav-toggle-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+    background-color: var(--light-gold);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-list {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navbar-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--light-gold);
+    border-radius: 1px;
+    transition: width 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: var(--light-gold) !important;
+    transform: translateY(-2px);
+}
+
+.navbar-link:hover::after {
+    width: 100%;
+}
+
+.navbar-link.color {
+    color: var(--primary-gold) !important;
+    font-weight: 700;
+}
+
+.navbar-link.color::after {
+    width: 100%;
+    background-color: var(--primary-gold);
+}
+
+/* 移动端导航适配 */
+@media (max-width: 768px) {
+    .nav-toggle-btn {
+        display: block;
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100vh;
+        background-color: var(--primary-navy);
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        overflow: hidden;
+        transition: width 0.4s ease;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar.active {
+        width: 80%;
+    }
+
+    .navbar-list {
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .navbar-link {
+        font-size: 1.2rem;
+        padding: 1rem 0;
+        display: block;
+        width: 100%;
+    }
+
+    .header .container {
+        padding: 0 1rem;
+    }
+
+    .big-logo a {
+        font-size: 1.5rem;
+    }
+}
+
+/* 联系我们标题 */
+.contact-title {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.contact-title h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--text-white);
+    position: relative;
+    display: inline-block;
+}
+
+.contact-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--medal-gradient);
+    border-radius: 2px;
+}
+
+.contact-title p {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    margin-top: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 满天祝福语效果 */
+.floating-blessings {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.blessing-text {
+    position: absolute;
+    color: rgba(239, 200, 72, 0.7);
+    font-size: 1.2rem;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(239, 200, 72, 0.3);
+    animation: floatAround 25s linear infinite;
+    z-index: 1;
+}
+
+.blessing-text:hover {
+    color: var(--light-gold);
+    text-shadow: 0 0 15px rgba(239, 200, 72, 0.8);
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+@keyframes floatAround {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 联系我们主体容器 */
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-bottom: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* 表单区域 */
+.contact-form-card {
+    background: linear-gradient(135deg, rgba(5, 16, 56, 0.7), rgba(8, 28, 88, 0.9));
+    border: 2px solid var(--primary-gold);
+    border-radius: 10px;
+    padding: 40px 30px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 10;
+}
+
+.contact-form-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-gold), var(--light-gold), transparent);
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.contact-form-card:hover::before {
+    opacity: 0.5;
+}
+
+.form-title {
+    color: var(--light-gold);
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(248, 215, 104, 0.3);
+    text-align: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+
+    color: var(--text-white);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.form-input, .form-textarea {
+    padding: 12px 15px;
+    background: rgba(8, 28, 88, 0.6);
+    border: 2px solid rgba(239, 200, 72, 0.3);
+    border-radius: 6px;
+    color: var(--text-white);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--light-gold);
+    box-shadow: var(--gold-glow);
+    background: rgba(8, 28, 88, 0.8);
+}
+
+.form-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submit-btn {
+    padding: 14px 0;
+    background: var(--medal-gradient);
+    border: none;
+    border-radius: 6px;
+    color: var(--primary-navy);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--gold-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(239, 200, 72, 0.5);
+    background: linear-gradient(135deg, var(--light-gold) 0%, var(--primary-gold) 100%);
+}
+
+/* 球迷留言展示区 */
+.fan-messages-card {
+    background: linear-gradient(135deg, rgba(5, 16, 56, 0.7), rgba(8, 28, 88, 0.9));
+    border: 2px solid var(--primary-gold);
+    border-radius: 10px;
+    padding: 40px 30px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 10;
+}
+
+.fan-messages-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent, var(--light-gold), var(--primary-gold));
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.fan-messages-card:hover::before {
+    opacity: 0.3;
+}
+
+.messages-title {
+    color: var(--light-gold);
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(248, 215, 104, 0.3);
+    text-align: center;
+}
+
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* 隐藏滚动条 */
+.messages-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages-list::-webkit-scrollbar-thumb {
+    background: var(--primary-gold);
+    border-radius: 3px;
+}
+
+.messages-list::-webkit-scrollbar-track {
+    background: rgba(8, 28, 88, 0.5);
+}
+
+.message-item {
+    background: rgba(8, 28, 88, 0.4);
+    border-radius: 8px;
+    padding: 20px;
+    border-left: 3px solid var(--light-gold);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.message-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(239, 200, 72, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.message-item:hover::before {
+    left: 100%;
+}
+
+.message-item:hover {
+    background: rgba(8, 28, 88, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.message-nickname {
+    color: var(--light-gold);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.message-time {
+    color: rgba(248, 249, 252, 0.5);
+    font-size: 0.85rem;
+}
+
+.message-content {
+    color: var(--text-gray);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* 重新设计的高级社交媒体联系区域 */
+.social-connect-section {
+    margin-top: 60px;
+    position: relative;
+    z-index: 10;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h3 {
+    font-size: 2rem;
+    color: var(--light-gold);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--medal-gradient);
+    border-radius: 2px;
+}
+
+.section-title p {
+    color: var(--text-gray);
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+.social-platforms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.platform-card {
+    background: linear-gradient(145deg, rgba(8, 28, 88, 0.8), rgba(5, 16, 56, 0.9));
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(239, 200, 72, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--medal-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.platform-card:hover::before {
+    transform: scaleX(1);
+}
+
+.platform-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-gold);
+    box-shadow: var(--gold-glow);
+}
+
+.platform-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 200, 72, 0.1);
+    transition: all 0.3s ease;
+}
+
+.platform-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.platform-card:hover .platform-icon {
+    transform: scale(1.1);
+    background: rgba(239, 200, 72, 0.2);
+}
+
+.platform-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--light-gold);
+    margin-bottom: 10px;
+}
+
+.platform-desc {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.platform-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 25px;
+    background: rgba(239, 200, 72, 0.1);
+    color: var(--light-gold);
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid rgba(239, 200, 72, 0.3);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.platform-link:hover {
+    background: rgba(239, 200, 72, 0.2);
+    border-color: var(--light-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(239, 200, 72, 0.2);
+}
+
+.link-icon {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.platform-link:hover .link-icon {
+    transform: translateX(3px);
+}
+
+/* 图片上传预览区域 */
+.image-upload-section {
+    margin-top: 40px;
+    background: rgba(8, 28, 88, 0.4);
+    border-radius: 12px;
+    padding: 30px;
+    border: 2px dashed rgba(239, 200, 72, 0.3);
+    transition: all 0.3s ease;
+}
+
+.image-upload-section:hover {
+    border-color: var(--primary-gold);
+    background: rgba(8, 28, 88, 0.6);
+}
+
+.upload-title {
+    color: var(--light-gold);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.upload-description {
+    color: var(--text-gray);
+    text-align: center;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.upload-btn {
+    display: block;
+    width: 200px;
+    margin: 0 auto 25px;
+    padding: 12px 25px;
+    background: var(--medal-gradient);
+    color: var(--primary-navy);
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.upload-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(239, 200, 72, 0.4);
+}
+
+.image-preview {
+    display: none;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.preview-title {
+    color: var(--light-gold);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.preview-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 2px solid var(--primary-gold);
+    margin: 0 auto;
+    display: block;
+    box-shadow: var(--gold-glow);
+}
+
+/* 移动端适配 */
+@media (max-width: 992px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .contact-title h2 {
+        font-size: 2.2rem;
+    }
+
+    .form-title, .messages-title {
+        font-size: 1.4rem;
+    }
+
+    .messages-list {
+        max-height: 400px;
+    }
+    
+    .social-platforms {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-title h2 {
+        font-size: 2rem;
+    }
+
+    .contact-form-card, .fan-messages-card {
+        padding: 30px 20px;
+    }
+    
+    .platform-card {
+        padding: 25px 20px;
+    }
+    
+    .platform-name {
+        font-size: 1.2rem;
+    }
+    
+    .image-upload-section {
+        padding: 25px 20px;
+    }
+}
+
+/* 页脚样式（与其他页面一致） */
+.footer {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+    color: var(--text-gray);
+    padding: 60px 0 30px;
+    border-top: 1px solid rgba(239, 200, 72, 0.3);
+    margin-top: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-white);
+    margin-bottom: 15px;
+}
+
+.footer-logo span {
+    color: var(--primary-gold);
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.footer-logo span::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light-gold);
+    border-radius: 1px;
+}
+
+.footer-slogan {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-gray);
+}
+
+.footer-copyright {
+    font-size: 0.9rem;
+    color: rgba(248, 249, 252, 0.6);
+}
+
+.footer-nav-title {
+    font-size: 1.2rem;
+    color: var(--primary-gold);
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.footer-nav-list {
+    list-style: none;
+}
+
+.footer-nav-link {
+    display: block;
+    color: var(--text-gray);
+    text-decoration: none;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer-nav-link:hover {
+    color: var(--light-gold);
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: 40px auto 0;
+    padding: 20px 20px 0;
+    border-top: 1px solid rgba(239, 200, 72, 0.15);
+}
+
+.footer-disclaimer {
+    font-size: 0.85rem;
+    color: rgba(248, 249, 252, 0.5);
+    text-align: center;
+    padding-bottom: 20px;
+    line-height: 1.6;
+}
+    </style>
+</head>
+<body class="dark_theme">
+    <!-- 满天祝福语效果 -->
+    <div class="floating-blessings" id="floatingBlessings"></div>
+    
+    <!-- 导航栏（当前页"联系我们"高亮） -->
+    <header class="header" data-header>
+        <div class="container">
+            <h1 class="h1 big-logo">
+                <a href="../index.html"><span>樊振东·超级金满贯</span></a>
+            </h1>
+
+            <div class="navbar-actions">
+                <button class="theme-btn" data-theme-btn>
+                    <span class="icon">⭐⭐⭐</span>
+                </button>
+            </div>
+
+            <button class="nav-toggle-btn" data-nav-toggle-btn>
+                <span class="one"></span>
+                <span class="two"></span>
+                <span class="three"></span>
+            </button>
+
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="./index.html" class="navbar-link ">首页</a>
+                    </li>
+                    <li>
+                        <a href="./职业生涯.html"  class="navbar-link">职业生涯</a>
+                    </li>
+                    <li>
+                        <a href="./荣誉成就.html" class="navbar-link">荣誉成就</a>
+                    </li>
+                    <li>
+                        <a href="./精神品质.html" class="navbar-link">精神品质</a>
+                    </li>
+                    <li>
+                        <a href="./赛场风采.html" class="navbar-link">赛场风采</a>
+                    </li>
+                    <li>
+                        <a href="./最新消息.html" class="navbar-link">最新消息</a>
+                    </li>
+                    <li>
+                        <a href="./联系我们.html" class="navbar-link  color">联系我们</a>
+                    </li>
+					<li>
+                        <a href="./Login.html" class="navbar-link">登录</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 联系我们主体 -->
+    <main>
+        <section class="contact-section">
+            <div class="contact-title">
+                <h2>心声传递 · 与樊振东同行</h2>
+                <p>在这里留下你想对樊振东说的话，或提出宝贵建议，我们会汇总传递这份支持与热爱</p>
+            </div>
+
+            <div class="contact-container">
+                <!-- 表单区域 -->
+                <div class="contact-form-card">
+                    <h3 class="form-title">留下你的心声</h3>
+                    <form class="contact-form" id="fanMessageForm">
+                        <div class="form-group">
+                            <label for="nickname" class="form-label">昵称</label>
+                            <input type="text" id="nickname" class="form-input" placeholder="请输入你的昵称" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">想对樊振东说的话</label>
+                            <textarea id="message" class="form-textarea" placeholder="分享你的支持、祝福或建议..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">提交留言</button>
+                    </form>
+                </div>
+
+                <!-- 球迷留言展示区 -->
+                <div class="fan-messages-card">
+                    <h3 class="messages-title">球迷心声墙</h3>
+                    <div class="messages-list" id="messagesList">
+                        <!-- 示例留言1 -->
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-nickname">Fantacia</span>
+                                <span class="message-time">2025-12-22 17:35</span>
+                            </div>
+                            <div class="message-content">
+                                2021年东京奥运会至今，樊振东一直是我的精神榜样。本学期我学习了网站设计与开发，第一时间就想到了建立此网站来表达一个渺小的繁星对东哥的敬佩和热爱！大雪压青松，青松挺且直。要知松高洁，待到雪化时！也祝看到此网站的每一位拥有美好的人生！
+                            </div>
+                        </div>
+                        <!-- 示例留言2 -->
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-nickname">乒乓爱好者小李</span>
+                                <span class="message-time">2025-08-12 09:15</span>
+                            </div>
+                            <div class="message-content">
+                                你的反手暴冲太帅了！一直把你当作榜样，坚持打球五年了，虽然水平一般，但每次遇到瓶颈都会看你的比赛视频汲取力量。希望未来能看到你更多精彩的比赛，也期待能有机会现场为你加油！
+                            </div>
+                        </div>
+                        <!-- 示例留言3 -->
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-nickname">默默支持的老粉</span>
+                                <span class="message-time">2025-08-08 21:45</span>
+                            </div>
+                            <div class="message-content">
+                                见证了你从低谷到巅峰，从青涩到成熟，你的坚持和谦逊一直感染着我。希望你在追求成绩的同时照顾好身体，健康永远是第一位的！无论输赢，你都是我们心中的骄傲，樊振东，继续冲呀！
+                            </div>
+                        </div>
+						
+                        <!-- 示例留言4 -->
+                        <div class="message-item">
+                            <div class="message-header">
+                                <span class="message-nickname">来自广州的粉丝</span>
+                                <span class="message-time">2025-08-05 16:20</span>
+                            </div>
+                            <div class="message-content">
+                                作为同乡，一直为你感到自豪！每次看到你在国际赛场上升国旗、奏国歌，都无比激动。希望你能常回家看看，也期待你能带动更多青少年爱上乒乓球这项运动，传承国球精神～
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 图片上传区域 -->
+            <div class="image-upload-section">
+                <h4 class="upload-title">分享你的珍藏照片</h4>
+                <p class="upload-description">上传你珍藏的樊振东照片，与全球球迷一起分享你的独家记忆</p>
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                <button class="upload-btn" onclick="document.getElementById('imageUpload').click()">选择图片上传</button>
+                
+                <div class="image-preview" id="imagePreview">
+                    <p class="preview-title">图片预览：</p>
+                    <img class="preview-image" id="previewImage" src="" alt="上传的图片">
+                </div>
+            </div>
+            
+            <!-- 重新设计的高级社交媒体联系区域 -->
+            <div class="social-connect-section">
+                <div class="section-title">
+                    <h3>连接世界 · 汇聚支持</h3>
+                    <p>通过这些平台关注樊振东的最新动态，与全球球迷一起为他加油</p>
+                </div>
+                
+                <div class="social-platforms">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <img src="照片集/樊振东微博.png" alt="微博">
+                        </div>
+                        <h4 class="platform-name">樊振东本人微博</h4>
+                        <p class="platform-desc">关注樊振东本人的官方微博，获取最新训练动态、比赛花絮和日常分享</p>
+                        <a href="https://weibo.com/u/7888222767" target="_blank" class="platform-link">
+                            立即关注
+                            <i class="fas fa-arrow-right link-icon"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <img src="照片集/球迷会微博.jpg" alt="球迷会">
+                        </div>
+                        <h4 class="platform-name">樊振东球迷会</h4>
+                        <p class="platform-desc">加入樊振东官方球迷会，与其他粉丝一起分享支持、组织活动</p>
+                      <a href="https://weibo.com/u/3329910664" target="_blank" class="platform-link">
+                            加入我们
+                            <i class="fas fa-arrow-right link-icon"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <img src="照片集/球迷会哔哩哔哩.jpg" alt="哔哩哔哩">
+                        </div>
+                        <h4 class="platform-name">B站官方频道</h4>
+                        <p class="platform-desc">观看精彩赛事集锦、技术解析和独家专访内容，与UP主互动交流</p>
+                        <a href="https://b23.tv/NxRMLNZ" target="_blank" class="platform-link">
+                            订阅频道
+                            <i class="fas fa-arrow-right link-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <!-- 品牌信息区 -->
+        <div class="footer-brand">
+            <div class="brand-header">
+                <h3 class="footer-logo">
+                    樊振东· 乒坛传奇
+                </h3>
+                <div class="footer-line"></div>
+            </div>
+            <div class="slogan-container">
+                <p class="footer-slogan">十年磨剑，以梦为马；乒坛逐光，铸就传奇</p>
+                <p class="footer-slogan">大雪压青松，青松挺且直。</p>
+                <p class="footer-slogan">要知松高洁，待到雪化时！</p>
+            </div>
+        </div>
+        
+        <!-- 导航和版权区域 -->
+        <div class="footer-bottom-section">
+            <!-- 单行导航 -->
+            <div class="footer-nav-container">
+                <h4 class="footer-nav-title">快速导航</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="./index.html" class="footer-nav-link">首页</a></li>
+                    <li><a href="./职业生涯.html" class="footer-nav-link">职业生涯</a></li>
+                    <li><a href="./荣誉成就.html" class="footer-nav-link">荣誉成就</a></li>
+					<li><a href="./精神品质.html" class="footer-nav-link">精神品质</a></li>
+                    <li><a href="./赛场风采.html" class="footer-nav-link">赛场风采</a></li>
+                    <li><a href="./最新消息.html" class="footer-nav-link">最新消息</a></li>
+                    <li><a href="./联系我们.html" class="footer-nav-link">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <!-- 版权和祝福 -->
+            <div class="footer-legal">
+                <p class="footer-copyright">
+                    &copy; 版权樊振东球迷Fantacia所有
+                </p>
+                <p class="footer-disclaimer">
+                    祝我们各自拥有美好的人生！
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* 页脚整体样式 */
+.footer {
+    background: linear-gradient(135deg, rgba(8, 28, 88, 0.95), rgba(5, 16, 56, 0.95));
+    color: #e0e0e0;
+    padding: 50px 0 30px;
+    font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.8) 50%, 
+        transparent 100%);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 品牌信息区样式 */
+.footer-brand {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.brand-header {
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    background: linear-gradient(45deg, #EFC848, #ff9a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.footer-logo span {
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.footer-line {
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.6) 50%, 
+        transparent 100%);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.slogan-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-slogan {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    position: relative;
+    padding: 0 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer-slogan:first-child {
+    font-size: 18px;
+    color: #EFC848;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.footer-slogan:last-child {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 导航和版权区域 */
+.footer-bottom-section {
+    border-top: 1px solid rgba(239, 200, 72, 0.2);
+    padding-top: 30px;
+}
+
+.footer-nav-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.footer-nav-title {
+    color: #EFC848;
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.footer-nav-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #EFC848;
+    transition: width 0.3s ease;
+}
+
+.footer-nav-link:hover {
+    color: #EFC848;
+}
+
+.footer-nav-link:hover::after {
+    width: 100%;
+}
+
+/* 版权和祝福 */
+.footer-legal {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-copyright {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-disclaimer {
+    margin: 0;
+    font-size: 15px;
+    color: rgba(239, 200, 72, 0.9);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 25px;
+    }
+    
+    .footer-logo {
+        font-size: 24px;
+    }
+    
+    .footer-logo span {
+        font-size: 28px;
+    }
+    
+    .footer-slogan {
+        font-size: 15px;
+        padding: 0 15px;
+    }
+    
+    .footer-slogan:first-child {
+        font-size: 16px;
+    }
+    
+    .footer-nav-list {
+        gap: 15px 20px;
+    }
+    
+    .footer-nav-link {
+        font-size: 14px;
+    }
+    
+    .footer-nav-title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-nav-list {
+        gap: 12px 15px;
+    }
+    
+    .footer-nav-link {
+        font-size: 13px;
+    }
+    
+    .footer-container {
+        padding: 0 15px;
+    }
+    
+    .slogan-container {
+        gap: 8px;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-brand,
+.footer-nav-container,
+.footer-legal {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.footer-nav-container {
+    animation-delay: 0.2s;
+}
+
+.footer-legal {
+    animation-delay: 0.4s;
+}
+</style>
+
+    <!-- 交互脚本：导航栏+留言提交+满天祝福语+图片上传 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. 汉堡菜单切换
+            const navToggleBtn = document.querySelector('[data-nav-toggle-btn]');
+            const navbar = document.querySelector('[data-navbar]');
+            
+            navToggleBtn.addEventListener('click', function() {
+                navToggleBtn.classList.toggle('active');
+                navbar.classList.toggle('active');
+                document.body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // 移动端点击导航链接关闭菜单
+            const navbarLinks = document.querySelectorAll('.navbar-link');
+            navbarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        navToggleBtn.classList.remove('active');
+                        navbar.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+
+            // 2. 留言提交功能
+            const messageForm = document.getElementById('fanMessageForm');
+            const messagesList = document.getElementById('messagesList');
+
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // 阻止表单默认提交
+
+                // 获取表单数据
+                const nickname = document.getElementById('nickname').value.trim();
+                const messageContent = document.getElementById('message').value.trim();
+
+                // 简单验证
+                if (!nickname || !messageContent) {
+                    alert('请填写昵称和留言内容！');
+                    return;
+                }
+
+                // 生成当前时间
+                const now = new Date();
+                const timeStr = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+                // 创建新留言元素
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message-item';
+                newMessage.innerHTML = `
+                    <div class="message-header">
+                        <span class="message-nickname">${nickname}</span>
+                        <span class="message-time">${timeStr}</span>
+                    </div>
+                    <div class="message-content">
+                        ${messageContent}
+                    </div>
+                `;
+
+                // 添加到留言列表顶部
+                messagesList.insertBefore(newMessage, messagesList.firstChild);
+
+                // 滚动到顶部
+                messagesList.scrollTop = 0;
+
+                // 重置表单
+                messageForm.reset();
+
+                // 提示提交成功
+                alert('留言提交成功！你的支持将传递给樊振东～');
+                
+                // 在满天祝福语中添加这条新留言
+                addFloatingBlessing(messageContent);
+            });
+
+            // 3. 满天祝福语效果
+            const floatingBlessings = document.getElementById('floatingBlessings');
+            const blessings = [
+                "樊振东，永远支持你！",
+                "你是中国的骄傲！",
+                "小胖加油，巴黎等你！",
+                "乒坛传奇，继续闪耀！",
+                "健康涨球，未来可期！",
+                "你的坚持是我们的力量",
+                "从青涩少年到世界第一",
+                "每一次挥拍都充满力量",
+                "永远相信你，樊振东！",
+                "球不落地，永不放弃！",
+                "乒坛王者，继续前行！",
+                "你的努力我们都看得见",
+                "为国争光，为你骄傲！",
+                "技术全面，心态沉稳",
+                "期待你更多精彩比赛",
+                "从广州走向世界",
+                "少年天才，乒坛传奇",
+                "你的笑容是我们的阳光",
+                "继续书写乒坛历史",
+                "永远的小胖，永远的骄傲"
+            ];
+
+            // 创建满天祝福语
+            function createFloatingBlessings() {
+                // 先清除现有的祝福语
+                floatingBlessings.innerHTML = '';
+                
+                // 创建40个飘动的祝福语
+                for (let i = 0; i < 40; i++) {
+                    const blessing = document.createElement('div');
+                    blessing.className = 'blessing-text';
+                    
+                    // 随机选择祝福语
+                    const randomText = blessings[Math.floor(Math.random() * blessings.length)];
+                    blessing.textContent = randomText;
+                    
+                    // 随机位置
+                    const left = Math.random() * 100;
+                    blessing.style.left = `${left}%`;
+                    
+                    // 随机大小
+                    const size = 0.8 + Math.random() * 0.8;
+                    blessing.style.fontSize = `${size}rem`;
+                    
+                    // 随机透明度
+                    const opacity = 0.4 + Math.random() * 0.5;
+                    blessing.style.opacity = opacity;
+                    
+                    // 随机动画延迟和持续时间
+                    const delay = Math.random() * 20;
+                    const duration = 20 + Math.random() * 15;
+                    blessing.style.animationDelay = `${delay}s`;
+                    blessing.style.animationDuration = `${duration}s`;
+                    
+                    // 随机颜色（金色系）
+                    const goldHue = 45 + Math.random() * 15;
+                    const saturation = 70 + Math.random() * 20;
+                    const lightness = 50 + Math.random() * 20;
+                    blessing.style.color = `hsl(${goldHue}, ${saturation}%, ${lightness}%)`;
+                    
+                    floatingBlessings.appendChild(blessing);
+                }
+            }
+            
+            // 添加新的祝福语
+            function addFloatingBlessing(text) {
+                const blessing = document.createElement('div');
+                blessing.className = 'blessing-text';
+                blessing.textContent = text;
+                
+                // 随机位置
+                const left = Math.random() * 100;
+                blessing.style.left = `${left}%`;
+                
+                // 随机大小
+                const size = 0.9 + Math.random() * 0.7;
+                blessing.style.fontSize = `${size}rem`;
+                
+                // 随机透明度
+                blessing.style.opacity = 0.7;
+                
+                // 随机动画延迟和持续时间
+                const delay = Math.random() * 5;
+                const duration = 18 + Math.random() * 10;
+                blessing.style.animationDelay = `${delay}s`;
+                blessing.style.animationDuration = `${duration}s`;
+                
+                // 随机颜色
+                const goldHue = 45 + Math.random() * 15;
+                const saturation = 75 + Math.random() * 15;
+                const lightness = 55 + Math.random() * 15;
+                blessing.style.color = `hsl(${goldHue}, ${saturation}%, ${lightness}%)`;
+                
+                floatingBlessings.appendChild(blessing);
+                
+                // 10秒后移除这个祝福语
+                setTimeout(() => {
+                    if (blessing.parentNode === floatingBlessings) {
+                        floatingBlessings.removeChild(blessing);
+                    }
+                }, duration * 1000 + delay * 1000);
+            }
+
+            // 初始化满天祝福语
+            createFloatingBlessings();
+            
+            // 每隔一段时间重新创建祝福语，防止页面元素过多
+            setInterval(() => {
+                // 如果祝福语数量过多，重新创建
+                if (floatingBlessings.children.length > 50) {
+                    createFloatingBlessings();
+                }
+            }, 60000); // 每60秒检查一次
+
+            // 4. 图片上传预览功能
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImage = document.getElementById('previewImage');
+            
+            imageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // 检查文件类型
+                    if (!file.type.match('image.*')) {
+                        alert('请选择图片文件！');
+                        return;
+                    }
+                    
+                    // 检查文件大小（限制为5MB）
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('图片大小不能超过5MB！');
+                        return;
+                    }
+                    
+                    // 创建FileReader来读取图片
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        previewImage.src = event.target.result;
+                        imagePreview.style.display = 'block';
+                        
+                        // 显示成功提示
+                        alert('图片上传成功！你可以保存这张图片到本地，或者分享给其他球迷。');
+                        
+                        // 模拟上传到服务器的过程
+                        simulateImageUpload(file.name);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // 模拟图片上传到服务器的过程
+            function simulateImageUpload(filename) {
+                console.log(`图片 ${filename} 已上传到服务器`);
+                // 在实际应用中，这里应该是一个真实的服务器端API调用
+            }
+        });
+    </script>
+</body>
+</html>

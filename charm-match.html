@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樊振东-从紫微星到超级全满贯</title>
+    <link rel="shortcut icon" href="./SVG/fujian.svg">
+    <!-- 引入外部资源 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap" rel="stylesheet">
+    <style>
+        /* 全局色调体系（复用原有） */
+        :root {
+            --primary-navy: #081C58;    /* 主色：更深的藏蓝 */
+            --primary-gold: #EFC848;    /* 主点缀：更亮的鎏金 */
+            --light-gold: #F8D768;      /* 次点缀：超亮鎏金 */
+            --dark-bg: #051038;         /* 全局背景：极致深的藏蓝 */
+            --overlay-bg: rgba(5, 16, 56, 0.8); /* 轮播遮罩 */
+            --text-white: #F8F9FC;      /* 基础白字 */
+            --text-gray: rgba(248, 249, 252, 0.8); /* 浅灰字 */
+            --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 导航栏阴影 */
+            --dark-gold: #D4A732;            /* 深金色 - 悬停状态 */
+            --light-navy: #0f245e;           /* 浅藏蓝 - 卡片背景 */
+            --accent-red: #D62828;           /* 中国红 - 特别强调 */
+            --disabled-gray: rgba(248, 249, 252, 0.6); /* 禁用状态文字 */
+            --hover-gold: #F8D768;
+            --active-gold: #D4A732;
+            --button-bg-hover: rgba(239, 200, 72, 0.1);
+            --link-hover-color: var(--light-gold);
+            --gold-glow: 0 0 15px rgba(239, 200, 72, 0.4);
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --card-glow: 0 0 0 1px rgba(239, 200, 72, 0.15);
+            --nav-shadow-strong: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --medal-gradient: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 100%);
+            --navy-gradient: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+        }
+
+        /* 全局样式重置+背景 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            min-height: 100vh;
+            font-family: "Montserrat", "Microsoft Yahei", sans-serif;
+            padding-top: 80px; /* 预留导航栏高度 */
+            overflow-x: hidden;
+        }
+
+        /* 导航栏样式（复用原有） */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: rgba(8, 28, 88, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(239, 200, 72, 0.3);
+            box-shadow:  var(--nav-shadow-strong);
+            padding: 0.8rem 0;
+        }
+
+        .header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .big-logo {
+            margin: 0;
+        }
+
+        .big-logo a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+
+        .big-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .big-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background-color: rgba(239, 200, 72, 0.2);
+            color: var(--light-gold);
+        }
+
+        .nav-toggle-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .nav-toggle-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-white);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background-color: var(--light-gold);
+        }
+
+        .nav-toggle-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background-color: var(--light-gold);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-link {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-link:hover {
+            color: var(--light-gold) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .navbar-link.color {
+            color: var(--primary-gold) !important;
+            font-weight: 700;
+        }
+
+        .navbar-link.color::after {
+            width: 100%;
+            background-color: var(--primary-gold);
+        }
+
+        /* 移动端导航适配 */
+        @media (max-width: 768px) {
+            .nav-toggle-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 0;
+                height: 100vh;
+                background-color: var(--primary-navy);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                overflow: hidden;
+                transition: width 0.4s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .navbar.active {
+                width: 80%;
+            }
+
+            .navbar-list {
+                flex-direction: column;
+                gap: 2rem;
+                width: 100%;
+            }
+
+            .navbar-link {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                display: block;
+                width: 100%;
+            }
+
+            .header .container {
+                padding: 0 1rem;
+            }
+
+            .big-logo a {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 赛场风采板块标题 */
+        .scenery-title-section {
+            text-align: center;
+            padding: 60px 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .scenery-main-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .scenery-main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--medal-gradient);
+            border-radius: 2px;
+        }
+
+        .scenery-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* 轮播卡片核心样式（参考示例整合） */
+        .app {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        .cardList {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            z-index: 20;
+        }
+
+        .cardList__btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(8, 28, 88, 0.8);
+            border: 1px solid var(--primary-gold);
+            color: var(--text-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 30;
+            margin: 0 15px;
+        }
+
+        .cardList__btn:hover {
+            background-color: rgba(239, 200, 72, 0.2);
+            border-color: var(--light-gold);
+            box-shadow: var(--gold-glow);
+        }
+
+        .cardList__btn .icon svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+        }
+
+        .cards__wrapper {
+            position: relative;
+            width: 80%;
+            height: 100%;
+            perspective: 1000px;
+        }
+
+.card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(239, 200, 72, 0.2);
+    will-change: transform;
+    z-index: 10; /* 新增：默认低层级 */
+    transform: translateX(100%); /* 新增：默认偏移到右侧视野外 */
+}
+
+/* 新增：完全隐藏的类 */
+.card.hidden--card {
+    opacity: 0 !important;
+    transform: translateX(100%) scale(0.8) !important;
+    z-index: 5 !important; /* 更低层级 */
+}
+
+.card.current--card {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0) rotateY(0deg) scale(1);
+    z-index: 25; /* 最高层级 */
+}
+
+.card.next--card {
+    opacity: 0.5;
+    transform: translateX(25%) rotateY(20deg) scale(0.8);
+    z-index: 20; /* 次高层级 */
+}
+
+.card.previous--card {
+    opacity: 0.5;
+    transform: translateX(-25%) rotateY(-20deg) scale(0.8);
+    z-index: 20; /* 次高层级 */
+}
+
+        .card__image {
+            width: 100%;
+            height: 100%;
+        }
+
+        .card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .infoList {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            width: 100%;
+            text-align: center;
+        }
+
+        .info__wrapper {
+            position: relative;
+            height: 100px;
+        }
+
+        .info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(20px);
+        }
+
+        .info.current--info {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .info.next--info, .info.previous--info {
+            opacity: 0;
+        }
+
+        .text {
+            margin: 0;
+            color: var(--text-white);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--light-gold);
+            margin-bottom: 10px;
+        }
+
+        .location {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-white);
+        }
+
+        .app__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .app__bg__image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .app__bg__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(8px) brightness(0.6);
+        }
+
+        .app__bg__image.current--image {
+            opacity: 1;
+        }
+
+        .loading__wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--dark-bg);
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader--text {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid rgba(239, 200, 72, 0.2);
+            border-top-color: var(--primary-gold);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 各运动领域详情板块 */
+        .sport-detail-section {
+            max-width: 1400px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .sport-detail-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-gold);
+        }
+
+        .sport-detail-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light-gold);
+            margin-bottom: 10px;
+        }
+
+        .sport-detail-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 1000px;
+        }
+
+        /* 图文视频组合布局 */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .media-text-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .media-text-title {
+            font-size: 1.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .media-text-content {
+            font-size: 1.1rem;
+            color: var(--text-white);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .media-text-highlight {
+            color: var(--light-gold);
+            font-weight: 600;
+        }
+
+        .media-content-block {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(239, 200, 72, 0.2);
+        }
+
+        .media-content-img,
+        .media-content-video {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .media-content-video {
+            height: 350px;
+            background: var(--dark-bg);
+        }
+
+        .media-content-caption {
+            padding: 20px;
+            background: var(--light-navy);
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 页脚样式（复用原有） */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+            color: var(--text-gray);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(239, 200, 72, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-white);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .footer-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .footer-slogan {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-gray);
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: rgba(248, 249, 252, 0.6);
+        }
+
+        .footer-nav-title {
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .footer-nav-list {
+            list-style: none;
+        }
+
+        .footer-nav-link {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-nav-link:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon i {
+            color: var(--primary-gold);
+            margin-right: 10px;
+            font-style: normal;
+        }
+
+        .social-icon:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding: 20px 20px 0;
+            border-top: 1px solid rgba(239, 200, 72, 0.15);
+        }
+
+        .footer-disclaimer {
+            font-size: 0.85rem;
+            color: rgba(248, 249, 252, 0.5);
+            text-align: center;
+            padding-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .scenery-main-title {
+                font-size: 2.5rem;
+            }
+
+            .app {
+                height: 400px;
+            }
+
+            .cards__wrapper {
+                width: 90%;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .sport-detail-title {
+                font-size: 2.2rem;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .media-content-img,
+            .media-content-video {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .scenery-main-title {
+                font-size: 2rem;
+            }
+
+            .scenery-subtitle {
+                font-size: 1rem;
+            }
+
+            .app {
+                height: 300px;
+            }
+
+            .cardList__btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .name {
+                font-size: 1.8rem;
+            }
+
+            .location {
+                font-size: 1rem;
+            }
+
+            .description {
+                font-size: 0.9rem;
+            }
+
+            .sport-detail-title {
+                font-size: 1.8rem;
+            }
+
+            .sport-detail-subtitle {
+                font-size: 1rem;
+            }
+
+            .media-text-title {
+                font-size: 1.5rem;
+            }
+
+            .media-text-content {
+                font-size: 1rem;
+            }
+
+            .media-content-img,
+            .media-content-video {
+                height: 200px;
+            }
+
+            .footer {
+                padding: 40px 0 20px;
+            }
+
+            .footer-container {
+                gap: 30px;
+            }
+
+            .footer-logo {
+                font-size: 1.5rem;
+            }
+
+            .footer-nav-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .scenery-main-title {
+                font-size: 1.8rem;
+            }
+
+            .app {
+                height: 250px;
+            }
+
+            .name {
+                font-size: 1.5rem;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航栏（修复跳转路径，当前页高亮） -->
+    <header class="header" data-header>
+        <div class="container">
+            <h1 class="h1 big-logo">
+                <a href="./index.html"><span>樊振东·超级金满贯</span></a>
+            </h1>
+
+            <div class="navbar-actions">
+                <button class="theme-btn" data-theme-btn>
+                    <span class="icon">⭐⭐⭐</span>
+                </button>
+            </div>
+
+            <button class="nav-toggle-btn" data-nav-toggle-btn>
+                <span class="one"></span>
+                <span class="two"></span>
+                <span class="three"></span>
+            </button>
+
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="./index.html" class="navbar-link">首页</a>
+                    </li>
+                    <li>
+                        <a href="./职业生涯.html" class="navbar-link">职业生涯</a>
+                    </li>
+                    <li>
+                        <a href="./荣誉成就.html" class="navbar-link">荣誉成就</a>
+                    </li>
+					<li>
+                        <a href="./精神品质.html" class="navbar-link">精神品质</a>
+                    </li>
+                    <li>
+                        <a href="./赛场风采.html" class="navbar-link color">赛场风采</a>
+                    </li>
+                    <li>
+                        <a href="./最新消息.html" class="navbar-link">最新消息</a>
+                    </li>
+                    <li>
+                        <a href="./联系我们.html" class="navbar-link">联系我们</a>
+                    </li>
+					<li>
+                        <a href="./Login.html" class="navbar-link">登录</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 赛场风采主标题 -->
+    <section class="scenery-title-section">
+        <h2 class="scenery-main-title">赛场风采</h2>
+        <p class="scenery-subtitle">
+            作为乒乓球领域的超级全满贯得主，樊振东不仅在专业赛道上铸就巅峰，更以多元实践彰显对竞技体育的纯粹热爱。他始终坚信“永恒的不变就是变化”，这份通透让他既深耕乒乓赛场，又跨界涉足足球、棒球、网球等多个项目。每个项目都有独特魅力，樊振东希望从优秀运动员身上汲取宝贵经验，用行动诠释对体育本质的深刻体悟与跨项热忱。
+        </p>
+    </section>
+
+    <!-- 轮播卡片区域（替换原方向感应卡片） -->
+    <div class="app">
+        <div class="cardList">
+            <button class="cardList__btn btn btn--left">
+                <div class="icon">
+                    <svg>
+                        <use xlink:href="#arrow-left"></use>
+                    </svg>
+                </div>
+            </button>
+
+            <div class="cards__wrapper">
+                <!-- JS会自动生成卡片，这里留空即可 -->
+            </div>
+
+            <button class="cardList__btn btn btn--right">
+                <div class="icon">
+                    <svg>
+                        <use xlink:href="#arrow-right"></use>
+                    </svg>
+                </div>
+            </button>
+        </div>
+
+        <div class="infoList">
+            <div class="info__wrapper">
+                <!-- JS会自动生成信息，这里留空即可 -->
+            </div>
+        </div>
+
+        <div class="app__bg">
+            <!-- JS会自动生成背景图，这里留空即可 -->
+        </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading__wrapper">
+        <div class="loader--text">Loading...</div>
+        <div class="loader">
+            <span></span>
+        </div>
+    </div>
+
+    <!-- SVG图标 -->
+    <svg class="icons" style="display: none;">
+        <symbol id="arrow-left" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+            <polyline points='328 112 184 256 328 400'
+                   style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
+        </symbol>
+        <symbol id="arrow-right" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+            <polyline points='184 112 328 256 184 400'
+                   style='fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px' />
+        </symbol>
+    </svg>
+
+    <!-- 乒乓球详情板块（修复资源路径为同级） -->
+    <section class="sport-detail-section">
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">乒乓球 · 巴黎奥运会</h3>
+            <p class="sport-detail-subtitle">作为樊振东的主项运动，乒乓球赛场是他绽放光芒的核心舞台，从少年成名到奥运夺冠，每一步都凝聚着汗水与坚持</p>
+        </div>
+
+        <div class="media-grid">
+            <!-- 文字板块 -->
+            <div class="media-text-block">
+                <h4 class="media-text-title">巴黎奥运会男单四分之一决赛对战张本智和</h4>
+                <p class="media-text-content">
+                    曾经的中国军人樊振东在八一建军节以4：3战胜日本选手张本智和，闯进到四强当中。绝处逢生的一场球，血战七局，赢下比赛的那一刻，樊振东张开双臂，就像肖申克救赎的安迪那样：
+                    <span class="media-text-highlight">走过绝望，迎接胜利的冲刷</span>。
+                    樊振东走过至暗时刻，终于云开见月明。决赛面对淘汰队友的莫雷高德，虽然对手打出载入史册的逆天操作，但已无力左右结局。最后那一记反手撕直线得分，似乎穿越了时光。
+                </p>
+                <p class="media-text-content">
+                    世乒赛出道于巴黎，世界杯三连冠起点于巴黎，如今全满贯的终点也定格在巴黎。<span class="media-text-highlight">循此苦旅，以达天际，一切都是命运最好的安排。</span>
+                </p>
+            </div>
+
+            <!-- 图片板块（修复路径） -->
+            <div class="media-content-block">
+                <a href="./巴黎眼神.png"><img src="照片集/巴黎眼神.png" alt="樊振东巴黎奥运会夺冠" class="media-content-img"></a>
+                <div class="media-content-caption">
+                    樊振东在巴黎奥运会四分之一决赛对战张本智和
+                </div>
+            </div>
+        </div>
+
+        <div class="media-grid">
+            <!-- 视频板块（修复路径） -->
+            <div class="media-content-block">
+                <video controls class="media-content-video">
+					
+                    <source src="视频/巴黎奥运会.mp4" type="video/mp4">
+                </video>
+                <div class="media-content-caption">
+                    巴黎奥运会，当你的身体到达极限，不屈的意志会带你杀出重围！
+                </div>
+            </div>
+
+            <!-- 文字板块 -->
+            <div class="media-text-block">
+                <h4 class="media-text-title">实现超级全满贯</h4>
+                <p class="media-text-content">
+                    年少成名，横空出世，一人爆打一个时代。当他弯腰捡球时，却以为他已站不起来。临危受命，力挽狂澜，铁血一单，当仁不让。当所有人都几近绝望，他义无反顾守护国乒荣光。
+                </p>
+                <p class="media-text-content">
+                    <span class="media-text-highlight">繁星闪耀，一路生花，最后一舞，终极绽放</span>。2013年横空出世的天才小胖，已经成为2024年力挽狂澜的东哥。历时2,862天的大满贯，是用时最久的大满，但这也是属于花界老将的独有浪漫。
+                </p>
+            </div>
+        </div>
+    </section>
+	
+    <!-- 乒乓球详情板块（修复资源路径） -->
+    <section class="sport-detail-section">
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">乒乓球 · 暴力美学</h3>
+            <p class="sport-detail-subtitle">作为樊振东的主项运动，乒乓球赛场是他绽放光芒的核心舞台，从少年成名到奥运夺冠，每一步都凝聚着汗水与坚持</p>
+        </div>
+       <div class="media-grid">
+            <!-- 文字板块 -->
+            <div class="media-text-block">
+                <h4 class="media-text-title">超强核心力量</h4>
+                <p class="media-text-content">
+                    樊振东的核心力量堪称乒坛“反人类级别”，这份能力既体现在赛场的现象级表现中——跪地救球0.8秒弹起衔接进攻、低空来球暴力拉穿防线、后仰击球如动漫场景般夸张，平板支撑抗干扰、立定跳远等体能测试数据也远超常人。又依托于先天身体优势与长期科学训练，他曾被举重队相中，留洋德甲融合欧洲训练体系，十年系统化打磨形成独特的
+                    <span class="media-text-highlight">“樊氏动态平衡模型”</span>。
+                    而这份核心力量更赋予他技术层面的绝对优势，让其击球能量传导极具爆发力，能以极简战术击穿对手防线，也成为他逆境翻盘的生理基础。
+                </p>
+            </div>
+
+            <!-- 图片板块（修复路径） -->
+            <div class="media-content-block">
+                <img src="照片集/核心力量.jpg" alt="樊振东巴黎奥运会夺冠" class="media-content-img">
+                <div class="media-content-caption">
+                   樊振东利用腰腹力量极限救球
+                </div>
+            </div>
+        </div>
+
+        <div class="media-grid">
+            <!-- 视频板块（修复路径） -->
+            <div class="media-content-block">
+                <video controls class="media-content-video">
+                    <source src="视频/你的半台空了.mp4" type="video/mp4">
+                </video>
+                <div class="media-content-caption">
+                    樊振东经典防爆冲集锦，展现极限复位能力和暴力击球力量传导
+                </div>
+            </div>
+
+            <!-- 文字板块 -->
+            <div class="media-text-block">
+                <h4 class="media-text-title">乒坛“暴力熊猫”</h4>
+                <p class="media-text-content">
+                    赛场之上，他凭借量子力学级的暴力击球技术——反手拧拉球速超110km/h、正手暴冲时速达150公里和“绝世好腰”的核心力量，从纯力量压制进化为融合控场与暴击的“太极熊猫”打法，2025年全运会更是十战十胜卫冕男单冠军，展现宗师级控场能力。
+                </p>
+                <p class="media-text-content">赛场之下，他却有着啃指甲、说德语呆萌等软萌一面。这一称号也让他成为具有全球影响力的文化符号，德甲征战引发海外轰动，欧洲俱乐部为他调整战术，他还以公益行动和传承精神诠释体育价值，
+                    <span class="media-text-highlight">从“重炮坦克”蜕变为“控场宗师”</span>，樊振东书写着刚柔并济的乒乓史诗。
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 足球详情板块（修复资源路径） -->
+    <section class="sport-detail-section">
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">足球 · 业余热爱</h3>
+            <p class="sport-detail-subtitle">乒乓球之外，足球是樊振东最爱的运动之一，作为皇家马德里的忠实球迷，他与皇马伯纳乌球场有着深厚的联结。</p>
+        </div>
+
+        <div class="media-grid">
+            <div class="media-text-block">
+                <h4 class="media-text-title">樊振东与皇家马德里的珍贵联结</h4>
+                <p class="media-text-content">
+                    樊振东的皇马情怀是双向奔赴的热血羁绊！2024年10月受邀参观伯纳乌、2025年9月观战马德里德比，他以球迷身份深度贴近挚爱球队。皇马也多次送上签名球衣、发布祝福视频。皇马的拼搏精神更化作他乒乓赛场
+                    <span class="media-text-highlight">绝境翻盘、永不言弃的底气</span>，让跨领域的体育精神彼此成就。
+                </p>
+            </div>
+            <div class="media-content-block">
+                <img src="照片集/伯纳乌广角.jpg" alt="樊振东公益足球赛" class="media-content-img">
+                <div class="media-content-caption">
+                    樊振东前往伯纳乌球场，现场观看皇家马德里球队比赛
+                </div>
+            </div>
+        </div>
+
+        <div class="media-grid">
+            <div class="media-content-block">
+                <video controls class="media-content-video">
+                    <source src="视频/欧冠.mp4" type="video/mp4">
+                </video>
+                <div class="media-content-caption">
+                    2025年6月6日，樊振东欧冠足球宣传片发布
+                </div>
+            </div>
+            <div class="media-text-block">
+                <h4 class="media-text-title">樊振东欧冠足球宣传片</h4>
+                <p class="media-text-content">
+                    足球是疲惫时的“一束光”，让他通过赛场心跳与人群共鸣，汲取力量并热爱生活。从足球中领悟
+                    <span class="media-text-highlight">“无惧输赢”</span>的哲学，将人生重大节点视作球赛，专注当下、尽情展示自我。
+                </p>
+                <p class="media-text-content">
+                    樊振东谈及时间与人生时坦言：2021年之前，自己更看重事情的结果；2021年之后，他学会让时间慢下来，珍惜每一个不可复制的当下，坚定地去做想做的事。他还寄语年轻的自己：“把人生的每个重大节点当作一场球赛，无惧输赢，酣畅淋漓地展现自己，专注脚下的球，就会有无限可能。”最后，他向所有球迷致敬：“球迷是同频的，又是幸运的，能在生活里找到这个支点，也能让热爱更加热爱。”
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 棒球详情板块（修复资源路径） -->
+    <section class="sport-detail-section">
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">棒球 · 跨界体验</h3>
+            <p class="sport-detail-subtitle">樊振东正式担任MLB中国区冠军荣耀大使，旨在向中国观众推广棒球运动。</p>
+        </div>
+
+        <div class="media-grid">
+            <div class="media-content-block">
+                <img src="照片集/棒球.jpg" alt="樊振东棒球体验" class="media-content-img">
+                <div class="media-content-caption">
+                    樊振东亲身体验棒球、公开科普规则、定制专属设备，感受棒球魅力
+                </div>
+            </div>
+            <div class="media-text-block">
+                <h4 class="media-text-title">跨界体验的运动天赋</h4>
+                <p class="media-text-content">
+                    在MLB常州发展中心的首次棒球训练中，教练称赞樊振东“运动天赋突出”，他拥有超强的手眼协调能力和发力控制能力，快速掌握了防守站位、投球技巧等基础动作。
+                    展现了顶尖运动员对跨领域运动的热情和深刻理解。
+                </p>
+                <p class="media-text-content">
+                    <span class="media-text-highlight">“防守中看似简单的失误，实则需要极高专注力”</span>。
+                    樊振东把棒球形容为智力游戏，需兼顾体能与战术选择。而体育精神具有共通性，棒球的团队协作和战术选择令樊振东深受启发，他也期待通过亲身体验让更多人感受这项运动的魅力。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 网球详情板块（修复资源路径） -->
+    <section class="sport-detail-section">
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">网球 · 休闲时光</h3>
+            <p class="sport-detail-subtitle">2024年上海劳力士大师赛期间，樊振东参与乒乓网球跨界表演赛，展现跨项目运动表现</p>
+        </div>
+
+        <div class="media-grid">
+            <div class="media-text-block">
+                <h4 class="media-text-title">一场跨界顶尖人物的联欢</h4>
+                <p class="media-text-content">
+                    2024年10月11日，樊振东搭档张之臻，在上海劳力士大师赛表演赛迎战费德勒/陈奕迅组合。仅经2小时网球特训的他，凭借乒乓发球技巧打出ACE球，让费德勒未能接起并获其称赞。表演赛最终费德勒组合2-0取胜，比赛中陈奕迅回球误击樊振东腹部，他还幽默喊话邀其演唱会。赛前樊振东还与费德勒切磋了乒乓，赛后樊振东也发布VLOG记录跨界趣味瞬间。
+                </p>
+                <p class="media-text-content">
+                    <span class="media-text-highlight">将乒乓灵巧融入网球赛场，上演跨项目梦幻联动。</span>这场仅两次训练就上阵的网球赛，让他体会到无关输赢的兴奋，也让他找回了运动本真，纯粹为自己而战。	
+                </p>
+            </div>
+            <div class="media-content-block">
+                <img src="照片集/网球下蹲.png" alt="樊振东网球休闲" class="media-content-img">
+                <div class="media-content-caption">
+                    上海劳力士大师赛，樊振东呈现乒乓球双打配合中经典下蹲姿势
+                </div>
+          </div>
+        </div>
+
+        <div class="media-grid">
+            <div class="media-content-block">
+                <video controls class="media-content-video">
+                    <source src="视频/网球视频.mp4" type="video/mp4">
+                </video>
+                <div class="media-content-caption">
+                    2024年10月11日晚，张之臻与樊振东进行表演赛
+                </div>
+            </div>
+            <div class="media-text-block">
+                <h4 class="media-text-title">樊振东上海劳力士大师赛</h4>
+                <p class="media-text-content">
+                    2025年上海大师赛设“传奇20周年”主题展，陈列樊振东签名球拍与跨界赛照片。同年9月“两博会”ATP展位也设其与费德勒的友谊赛照片墙，优酷还为赛事开设“樊振东专区”，《新民晚报》称其为<span class="media-text-highlight">“被乒乓耽误的网球天才”</span>。
+                </p>
+                <p class="media-text-content">
+                    他参与跨界赛，享受过程远比结果重要。“奥运后的这段时间，我不会存在那么多主观的情绪了，自己面对身边的每个人、每件事，都能够更客观。可能更客观一点，更理性一点去看待世界，是完全不同的体验吧。”樊振东心态的转变，也让他能以更平和理性的态度对待乒乓训练与比赛，享受每一次击球的快乐。
+                </p>
+            </div>
+        </div>
+    </section>
+
+ <footer class="footer">
+    <div class="footer-container">
+        <!-- 品牌信息区 -->
+        <div class="footer-brand">
+            <div class="brand-header">
+                <h3 class="footer-logo">
+                    樊振东· 乒坛传奇
+                </h3>
+                <div class="footer-line"></div>
+            </div>
+            <div class="slogan-container">
+                <p class="footer-slogan">十年磨剑，以梦为马；乒坛逐光，铸就传奇</p>
+                <p class="footer-slogan">大雪压青松，青松挺且直。</p>
+                <p class="footer-slogan">要知松高洁，待到雪化时！</p>
+            </div>
+        </div>
+        
+        <!-- 导航和版权区域 -->
+        <div class="footer-bottom-section">
+            <!-- 单行导航 -->
+            <div class="footer-nav-container">
+                <h4 class="footer-nav-title">快速导航</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="./index.html" class="footer-nav-link">首页</a></li>
+                    <li><a href="./职业生涯.html" class="footer-nav-link">职业生涯</a></li>
+                    <li><a href="./荣誉成就.html" class="footer-nav-link">荣誉成就</a></li>
+					<li><a href="./精神品质.html" class="footer-nav-link">精神品质</a></li>
+                    <li><a href="./赛场风采.html" class="footer-nav-link">赛场风采</a></li>
+                    <li><a href="./最新消息.html" class="footer-nav-link">最新消息</a></li>
+                    <li><a href="./联系我们.html" class="footer-nav-link">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <!-- 版权和祝福 -->
+            <div class="footer-legal">
+                <p class="footer-copyright">
+                    &copy; 版权樊振东球迷Fantacia所有
+                </p>
+                <p class="footer-disclaimer">
+                    祝我们各自拥有美好的人生！
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* 页脚整体样式 */
+.footer {
+    background: linear-gradient(135deg, rgba(8, 28, 88, 0.95), rgba(5, 16, 56, 0.95));
+    color: #e0e0e0;
+    padding: 50px 0 30px;
+    font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.8) 50%, 
+        transparent 100%);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 品牌信息区样式 */
+.footer-brand {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.brand-header {
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    background: linear-gradient(45deg, #EFC848, #ff9a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.footer-logo span {
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.footer-line {
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.6) 50%, 
+        transparent 100%);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.slogan-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-slogan {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    position: relative;
+    padding: 0 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer-slogan:first-child {
+    font-size: 18px;
+    color: #EFC848;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.footer-slogan:last-child {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 导航和版权区域 */
+.footer-bottom-section {
+    border-top: 1px solid rgba(239, 200, 72, 0.2);
+    padding-top: 30px;
+}
+
+.footer-nav-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.footer-nav-title {
+    color: #EFC848;
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+.footer-nav-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #EFC848;
+    transition: width 0.3s ease;
+}
+
+.footer-nav-link:hover {
+    color: #EFC848;
+}
+
+.footer-nav-link:hover::after {
+    width: 100%;
+}
+
+/* 版权和祝福 */
+.footer-legal {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-copyright {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-disclaimer {
+    margin: 0;
+    font-size: 15px;
+    color: rgba(239, 200, 72, 0.9);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 25px;
+    }
+    
+    .footer-logo {
+        font-size: 24px;
+    }
+    
+    .footer-logo span {
+        font-size: 28px;
+    }
+    
+    .footer-slogan {
+        font-size: 15px;
+        padding: 0 15px;
+    }
+    
+    .footer-slogan:first-child {
+        font-size: 16px;
+    }
+    
+    .footer-nav-list {
+        gap: 15px 20px;
+    }
+    
+    .footer-nav-link {
+        font-size: 14px;
+    }
+    
+    .footer-nav-title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-nav-list {
+        gap: 12px 15px;
+    }
+    
+    .footer-nav-link {
+        font-size: 13px;
+    }
+    
+    .footer-container {
+        padding: 0 15px;
+    }
+    
+    .slogan-container {
+        gap: 8px;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-brand,
+.footer-nav-container,
+.footer-legal {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.footer-nav-container {
+    animation-delay: 0.2s;
+}
+
+.footer-legal {
+    animation-delay: 0.4s;
+}
+</style>
+
+    <!-- 交互脚本：导航栏+留言提交+满天祝福语+图片
+
+    <!-- 引入外部JS -->
+    <script type="text/javascript" src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>
+    <script>
+        // 导航栏交互逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            // 汉堡菜单切换
+            const navToggleBtn = document.querySelector('[data-nav-toggle-btn]');
+            const navbar = document.querySelector('[data-navbar]');
+            
+            navToggleBtn.addEventListener('click', function() {
+                navToggleBtn.classList.toggle('active');
+                navbar.classList.toggle('active');
+                document.body.style.overflow = navbar.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // 点击导航链接关闭菜单（移动端）
+            const navbarLinks = document.querySelectorAll('.navbar-link');
+            navbarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        navToggleBtn.classList.remove('active');
+                        navbar.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+            
+            // 窗口大小变化时重置菜单状态
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navToggleBtn.classList.remove('active');
+                    navbar.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // 轮播卡片核心逻辑（修复版）
+        document.addEventListener('DOMContentLoaded', () => {
+            // 加载完成隐藏加载动画
+            const loadingWrapper = document.querySelector('.loading__wrapper');
+            imagesLoaded(document.body, () => {
+                gsap.to(loadingWrapper, { opacity: 0, duration: 0.5, onComplete: () => {
+                    loadingWrapper.style.display = 'none';
+                }});
+            });
+
+            // 定义数据（修复图片路径为同级）
+            const data = [
+                {
+                    name: '乒乓球',
+                    location: '核心赛场 · 超级全满贯得主',
+                    description: '暴力美学的极致展现，每一次挥拍都凝聚着汗水与荣耀',
+                    image: '照片集/乒乓球赛场.png'
+                },
+                {
+                    name: '足球',
+                    location: '业余热爱 · 皇马球迷',
+                    description: '伯纳乌球场观看皇家马德里足球比赛',
+                    image: '照片集/伯纳乌.png'
+                },
+                {
+                    name: '棒球',
+                    location: '跨界体验 · MLB大使',
+                    description: 'MLB美职棒大联盟中国区冠军荣耀大使',
+                    image: '照片集/棒球.jpg'
+                },
+                {
+                    name: '网球',
+                    location: '休闲时光 · 网球首秀',
+                    description: '2024年劳力士上海网球大师赛，“费德勒超级挚友之夜”',
+                    image: '照片集/网球.png'
+                }
+            ];
+
+            // 获取DOM元素
+            const cardList = document.querySelector('.cardList');
+            const cardsWrapper = document.querySelector('.cards__wrapper');
+            const infoWrapper = document.querySelector('.info__wrapper');
+            const appBg = document.querySelector('.app__bg');
+            const btnLeft = document.querySelector('.btn--left');
+            const btnRight = document.querySelector('.btn--right');
+
+            // 初始化索引
+            let currentIndex = 0;
+
+            // 初始化渲染：只创建一次DOM，避免重复渲染导致叠加
+            function initRender() {
+                // 清空原有内容
+                cardsWrapper.innerHTML = '';
+                infoWrapper.innerHTML = '';
+                appBg.innerHTML = '';
+
+                // 渲染每个元素
+                data.forEach((item, index) => {
+                    // 1. 创建卡片（仅加基础类，状态由updateCardStates控制）
+                    const card = document.createElement('div');
+                    card.className = 'card hidden--card'; // 默认隐藏
+                    card.innerHTML = `
+                        <div class="card__image">
+                            <img src="${item.image}" alt="${item.name}" />
+                        </div>
+                    `;
+                    cardsWrapper.appendChild(card);
+
+                    // 2. 创建信息（默认隐藏）
+                    const info = document.createElement('div');
+                    info.className = 'info';
+                    info.innerHTML = `
+                        <h1 class="text name">${item.name}</h1>
+                        <h4 class="text location">${item.location}</h4>
+                        <p class="text description">${item.description}</p>
+                    `;
+                    infoWrapper.appendChild(info);
+
+                    // 3. 创建背景图（默认隐藏）
+                    const bgImage = document.createElement('div');
+                    bgImage.className = 'app__bg__image';
+                    bgImage.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" />
+                    `;
+                    appBg.appendChild(bgImage);
+                });
+
+                // 初始化第一张卡片为当前状态
+                updateCardStates();
+            }
+
+            function updateCardStates() {
+                const cards = document.querySelectorAll('.card');
+                const infos = document.querySelectorAll('.info');
+                const bgImages = document.querySelectorAll('.app__bg__image');
+
+                // 遍历所有卡片：只显示当前/上一个/下一个，其余加隐藏类
+                cards.forEach((card, index) => {
+                    // 先移除所有状态类
+                    card.classList.remove('current--card', 'next--card', 'previous--card', 'hidden--card');
+                    
+                    // 当前卡片
+                    if (index === currentIndex) {
+                        card.classList.add('current--card');
+                        card.style.opacity = 1;
+                        card.style.pointerEvents = 'auto';
+                        card.style.transform = 'translateX(0) rotateY(0deg) scale(1)';
+                        card.style.zIndex = 25;
+                    }
+                    // 下一个卡片
+                    else if (index === (currentIndex + 1) % data.length) {
+                        card.classList.add('next--card');
+                        card.style.opacity = 0.5;
+                        card.style.transform = 'translateX(25%) rotateY(20deg) scale(0.8)';
+                        card.style.zIndex = 20;
+                    }
+                    // 上一个卡片
+                    else if (index === (currentIndex - 1 + data.length) % data.length) {
+                        card.classList.add('previous--card');
+                        card.style.opacity = 0.5;
+                        card.style.transform = 'translateX(-25%) rotateY(-20deg) scale(0.8)';
+                        card.style.zIndex = 20;
+                    }
+                    // 其余卡片：彻底隐藏到视野外
+                    else {
+                        card.classList.add('hidden--card');
+                        card.style.opacity = 0;
+                        card.style.pointerEvents = 'none';
+                        card.style.transform = 'translateX(100%) scale(0.8)'; // 偏移到右侧看不见
+                        card.style.zIndex = 5;
+                    }
+                });
+
+                // 信息和背景的逻辑保持不变
+                infos.forEach((info, index) => {
+                    info.style.opacity = 0;
+                    info.style.transform = 'translateY(20px)';
+                    if (index === currentIndex) {
+                        gsap.to(info, { opacity: 1, y: 0, duration: 0.5 });
+                    }
+                });
+
+                bgImages.forEach((img, index) => {
+                    img.style.opacity = 0;
+                    if (index === currentIndex) {
+                        gsap.to(img, { opacity: 1, duration: 0.5 });
+                    }
+                });
+            }
+
+            // 切换卡片逻辑
+            function changeCard(direction) {
+                // 更新索引
+                if (direction === 'right') {
+                    currentIndex = (currentIndex + 1) % data.length;
+                } else {
+                    currentIndex = (currentIndex - 1 + data.length) % data.length;
+                }
+                // 重新更新所有卡片状态
+                updateCardStates();
+            }
+
+            // 初始化渲染
+            initRender();
+
+            // 绑定按钮事件（加防抖，避免快速点击叠加）
+            let isClicking = false;
+            btnRight.addEventListener('click', () => {
+                if (!isClicking) {
+                    isClicking = true;
+                    changeCard('right');
+                    setTimeout(() => isClicking = false, 500); // 防抖间隔匹配动画时长
+                }
+            });
+            btnLeft.addEventListener('click', () => {
+                if (!isClicking) {
+                    isClicking = true;
+                    changeCard('left');
+                    setTimeout(() => isClicking = false, 500);
+                }
+            });
+
+            // 支持键盘左右箭头切换（加防抖）
+            document.addEventListener('keydown', (e) => {
+                if (!isClicking) {
+                    if (e.key === 'ArrowRight') {
+                        isClicking = true;
+                        changeCard('right');
+                        setTimeout(() => isClicking = false, 500);
+                    }
+                    if (e.key === 'ArrowLeft') {
+                        isClicking = true;
+                        changeCard('left');
+                        setTimeout(() => isClicking = false, 500);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樊振东-从紫微星到超级全满贯</title>
+    <!-- 修正路径：去掉上级目录../，改为同级路径 -->
+    <link rel="shortcut icon" href="./SVG/fujian.svg">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <style>
+        /* 全局色调（与首页一致） */
+        :root {
+            --primary-navy: #081C58;    /* 主色：更深的藏蓝 */
+            --primary-gold: #EFC848;    /* 主点缀：更亮的鎏金 */
+            --light-gold: #F8D768;      /* 次点缀：超亮鎏金 */
+            --dark-bg: #051038;         /* 全局背景：极致深的藏蓝 */
+            --text-white: #F8F9FC;      /* 基础白字 */
+            --text-gray: rgba(248, 249, 252, 0.8); /* 浅灰字 */
+            --gold-glow: 0 0 15px rgba(239, 200, 72, 0.4);
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --medal-gradient: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 100%);
+            --gold-border: 2px solid var(--primary-gold); /* 鎏金边框 */
+            --gold-border-hover: 2px solid var(--light-gold); /* hover高亮边框 */
+        }
+/* 未完待续 金色高亮样式 */
+.gold-highlight {
+    color: var(--light-gold); /* 沿用页面鎏金配色（超亮鎏金） */
+    font-size: 1.3rem; /* 字体放大（原文字是0.95rem，1.3rem更醒目） */
+    font-weight: 700; /* 加粗增强视觉 */
+    text-shadow: var(--gold-glow); /* 增加鎏金发光效果，和页面风格统一 */
+    display: block; /* 独占一行，更突出 */
+    margin-top: 10px; /* 与上方文字拉开间距 */
+    letter-spacing: 2px; /* 可选：增加字间距，更有质感 */
+}
+
+/* 新增：补充文字区域样式（核心新增） */
+.career-intro {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto 50px; /* 居中，与视频/标题拉开间距 */
+    padding: 25px 30px;
+    background: linear-gradient(135deg, rgba(8, 28, 88, 0.6), rgba(5, 16, 56, 0.8));
+    border-radius: 10px;
+    border: 1px solid var(--primary-gold);
+    box-shadow: var(--gold-glow), var(--card-shadow);
+}
+.career-intro p {
+    color: var(--text-white);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: center;
+    margin: 0;
+}
+.career-intro p span {
+    color: var(--light-gold);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* 移动端适配（可选）：移动端适当缩小一点，避免溢出 */
+@media (max-width: 768px) {
+    .gold-highlight {
+        font-size: 1.15rem;
+    }
+    /* 新增文字区域移动端适配 */
+    .career-intro {
+        padding: 20px 20px;
+        margin: 0 auto 35px;
+    }
+    .career-intro p {
+        font-size: 0.95rem;
+    }
+}
+
+/* 新增：视频容器样式 - 移除播放按钮，优化原生控件展示 */
+.video-container {
+    max-width: 800px; /* 限制视频最大宽度，避免过宽 */
+    width: 100%;
+    margin: 0 auto 60px; /* 居中+底部间距，和时间轴拉开距离 */
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--primary-gold);
+    box-shadow: var(--gold-glow), var(--card-shadow);
+    background-color: var(--primary-navy);
+    position: relative;
+}
+
+/* 视频封面样式优化 - 仅作为初始展示，点击后消失 */
+.video-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+/* 移除播放按钮样式 */
+.play-button {
+    display: none;
+}
+
+/* 视频样式 - 优化控件展示 */
+.career-video {
+    width: 100%;
+    height: 450px; /* 固定视频高度，保持比例 */
+    object-fit: cover;
+    display: block; /* 消除inline默认间隙 */
+    z-index: 2;
+    position: relative;
+    /* 优化原生控件样式 */
+    background-color: var(--primary-navy);
+}
+
+/* 移动端视频适配 */
+@media (max-width: 768px) {
+    .video-container {
+        max-width: 100%;
+        margin: 0 auto 40px;
+    }
+    .career-video {
+        height: 250px; /* 移动端缩小高度 */
+    }
+}
+
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body.dark_theme {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            min-height: 100vh;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+
+        /* 导航栏样式（与首页完全一致，当前页高亮） */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: rgba(8, 28, 88, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(239, 200, 72, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            padding: 0.8rem 0;
+        }
+
+        .header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .big-logo a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .big-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 6px; 
+        }
+
+        .big-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; 
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background-color: rgba(239, 200, 72, 0.2);
+            color: var(--light-gold);
+        }
+
+        .nav-toggle-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .nav-toggle-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-white);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background-color: var(--light-gold);
+        }
+
+        .nav-toggle-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background-color: var(--light-gold);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-link {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; 
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-link:hover {
+            color: var(--light-gold) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .navbar-link.color {
+            color: var(--primary-gold) !important;
+            font-weight: 700;
+        }
+
+        .navbar-link.color::after {
+            width: 100%;
+            background-color: var(--primary-gold);
+        }
+
+        /* 移动端导航适配 */
+        @media (max-width: 768px) {
+            .nav-toggle-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 0;
+                height: 100vh;
+                background-color: var(--primary-navy);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                overflow: hidden;
+                transition: width 0.4s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .navbar.active {
+                width: 80%;
+            }
+
+            .navbar-list {
+                flex-direction: column;
+                gap: 2rem;
+                width: 100%;
+            }
+
+            .navbar-link {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                display: block;
+                width: 100%;
+            }
+
+            .header .container {
+                padding: 0 1rem;
+            }
+
+            .big-logo a {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 职业生涯核心：时间轴+百叶窗效果 */
+        .career-section {
+            padding: 120px 0 80px; /* 避开导航栏 */
+        }
+
+        .career-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .career-title {
+            text-align: center;
+            margin-bottom: 40px; /* 调整间距，给新增文字区域留空间 */
+        }
+
+        .career-title h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-white);
+            position: relative;
+            display: inline-block;
+        }
+
+        .career-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: var(--medal-gradient);
+            border-radius: 2px;
+        }
+
+        .career-title p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 时间轴基础结构 - 修复中轴线延伸问题 */
+        .timeline {
+            position: relative;
+            padding: 20px 0 80px; /* 增加底部padding覆盖2025年 */
+            min-height: 100%;
+        }
+
+        /* 时间轴中轴线（鎏金渐变）- 强制延伸到底部 */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0; /* 中轴线从顶到底 */
+            left: 50%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-gold), var(--light-gold), var(--primary-gold));
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: var(--gold-glow);
+            z-index: 0;
+        }
+
+        /* 时间轴条目（左右交替）- 合并样式，提高优先级 */
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 25px !important; /* 强制生效：减少左右内边距，解决2019年拥挤 */
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        /* 时间轴圆点（鎏金高亮） */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gold);
+            border: 3px solid var(--primary-navy);
+            box-shadow: 0 0 10px rgba(239, 200, 72, 0.8);
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        /* 百叶窗容器：默认折叠，hover展开 */
+        .timeline-content {
+            background: linear-gradient(135deg, rgba(15, 36, 94, 0.4), rgba(8, 28, 88, 0.6));
+            border-radius: 8px;
+            padding: 15px;
+            overflow: hidden;
+            height: 90px; /* 折叠高度（适配标语+照片顶部） */
+            transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border-left: 3px solid var(--primary-gold);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* 元素间距 */
+        }
+
+        /* 通用展开高度 */
+        .timeline-item:hover .timeline-content {
+            height: 580px;
+            padding: 20px;
+            border-left: 3px solid var(--light-gold);
+        }
+
+        /* 2019年专属优化 - 强制生效 */
+        .timeline-item:nth-child(8) .timeline-content {
+            height: 90px !important;
+        }
+        .timeline-item:nth-child(8):hover .timeline-content {
+            height: 600px !important; /* 更高的展开高度，适配长文本 */
+        }
+
+        /* 年份标题 + 标语样式 */
+        .timeline-year {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .timeline-year span {
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 6px; 
+            background: linear-gradient(to right, var(--primary-gold), var(--light-gold)) no-repeat;
+            background-size: 100% 2px;
+            background-position: 0 calc(100% + 2px); 
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover .timeline-year span {
+            color: var(--light-gold);
+            background-size: 100% 2px;
+            background-color: rgba(239, 200, 72, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-position: 0 calc(100% + 2px);
+        }
+
+        /* 照片容器 */
+        .timeline-img-box {
+            width: 100%;
+            height: 220px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(239, 200, 72, 0.2);
+            background-color: rgba(8, 28, 88, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover .timeline-img-box {
+            border-color: var(--light-gold);
+            box-shadow: var(--gold-glow);
+        }
+        .timeline-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        .timeline-item:hover .timeline-img {
+            opacity: 1;
+        }
+        .timeline-img-placeholder {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        /* 内容文字 */
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--text-white);
+            line-height: 1.8;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.2s;
+            white-space: pre-line;
+            padding: 0 5px;
+        }
+        .timeline-item:hover .timeline-desc {
+            opacity: 1;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 10px;
+            }
+            .timeline-item {
+                width: 100% !important;
+                left: 0 !important;
+                padding-left: 40px !important;
+                padding-right: 20px !important;
+            }
+            .timeline-item::before {
+                left: 0;
+                margin-left: 10px;
+            }
+            .timeline-content {
+                height: 80px;
+            }
+            .timeline-item:hover .timeline-content {
+                height: 650px;
+            }
+            /* 移动端2019年高度适配 */
+            .timeline-item:nth-child(8):hover .timeline-content {
+                height: 680px !important;
+            }
+            .career-title h2 {
+                font-size: 2rem;
+            }
+            .timeline-img-box {
+                height: 180px;
+            }
+            .timeline-desc {
+                font-size: 0.9rem;
+            }
+            .timeline-year {
+                font-size: 1.5rem;
+            }
+            .timeline-year span {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+            color: var(--text-gray);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(239, 200, 72, 0.3);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-white);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .footer-slogan {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-gray);
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: rgba(248, 249, 252, 0.6);
+        }
+
+        .footer-nav-title {
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .footer-nav-list {
+            list-style: none;
+        }
+
+        .footer-nav-link {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-nav-link:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon i {
+            color: var(--primary-gold);
+            margin-right: 10px;
+            font-style: normal;
+        }
+
+        .social-icon:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding: 20px 20px 0;
+            border-top: 1px solid rgba(239, 200, 72, 0.15);
+        }
+
+        .footer-disclaimer {
+            font-size: 0.85rem;
+            color: rgba(248, 249, 252, 0.5);
+            text-align: center;
+            padding-bottom: 20px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="dark_theme">
+    <!-- 导航栏：统一所有链接为同级路径 ./ -->
+    <header class="header" data-header>
+        <div class="container">
+            <h1 class="h1 big-logo">
+                <a href="./index.html"><span>樊振东·超级金满贯</span></a>
+            </h1>
+            <div class="navbar-actions">
+                <button class="theme-btn" data-theme-btn>
+                    <span class="icon">⭐⭐⭐</span>
+                </button>
+            </div>
+            <button class="nav-toggle-btn" data-nav-toggle-btn>
+                <span class="one"></span>
+                <span class="two"></span>
+                <span class="three"></span>
+            </button>
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="./index.html" class="navbar-link">首页</a>
+                    </li>
+                    <li>
+                        <a href="./职业生涯.html"  class="navbar-link color">职业生涯</a>
+                    </li>
+                    <li>
+                        <a href="./荣誉成就.html" class="navbar-link">荣誉成就</a>
+                    </li>
+					<li>
+                        <a href="./精神品质.html" class="navbar-link">精神品质</a>
+                    </li>
+                    <li>
+                        <a href="./赛场风采.html" class="navbar-link">赛场风采</a>
+                    </li>
+                    <li>
+                        <a href="./最新消息.html" class="navbar-link">最新消息</a>
+                    </li>
+                    <li>
+                        <a href="./联系我们.html" class="navbar-link">联系我们</a>
+                    </li>
+					<li>
+                        <a href="./Login.html" class="navbar-link">登录</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 职业生涯主体：时间轴 -->
+    <main>
+        <section class="career-section">
+            <div class="career-container">
+                <div class="career-title">
+                    <h2>国家队十三载 · 职业生涯轨迹</h2>
+                    <p>从初出茅庐的天才少年，到登顶乒坛的超级全满贯，每一步都是汗水与热爱的沉淀</p>
+                </div>
+
+                <!-- 新增：补充文字区域（核心新增） -->
+                <div class="career-intro">
+                    <p>从2012年初登国家队舞台，到2024年巴黎奥运会成为世界乒坛第六位男子大满贯。<span>樊振东</span>用十余年的坚守与拼搏，书写了属于自己的乒坛传奇。他的职业生涯，<span>是少年意气的绽放，是低谷磨砺的坚韧，更是登顶时刻的从容</span>。每一个冠军背后，是无数次挥拍的汗水。从小胖到超级全满贯，从国内赛场到海外历练，他始终<span>以纯粹的热爱对抗压力，以持续的自我革新回应挑战</span>，用十几年的坚守诠释着：顶尖运动员的成长，从来不止于奖牌，更在于穿越低谷的韧性、突破舒适区的勇气，以及对乒乓初心的始终笃定。每一次突破，是对乒乓球极致的热爱与追求。这条轨迹，不仅记录着荣誉，更镌刻着一名运动员的成长与担当。</p>
+                </div>
+
+                <!-- 优化后的视频区域：移除大播放按钮，保留原生控件 -->
+                <div class="video-container">
+                    <!-- 视频封面图片 -->
+                    <img src="./video-cover.jpg" alt="樊振东职业生涯视频封面" class="video-poster" id="videoPoster">
+                    <!-- 移除播放按钮 -->
+                    <!-- 视频元素 - 保留原生controls属性，支持进度条、音量、全屏 -->
+                    <video class="career-video" controls preload="metadata" id="careerVideo">
+                        <source src="./视频/体坛人物.mp4" type="video/mp4">
+                        您的浏览器不支持HTML5视频播放，请升级浏览器或检查视频文件。
+                    </video>
+                </div>
+
+                <div class="timeline">
+                    <!-- 2012年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2012 <span>初启航，意气扬，厚积薄发露锋芒</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2012.png" alt="2012年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2012年 初入国家队</div>'">
+                            </div>
+                            <div class="timeline-desc">2月进入国家二队，10月升入国家一队
+亚青赛：男单冠军、男双冠军（与范胜鹏）、男团冠军（与范胜鹏、周启豪、郑培锋）
+全青赛：男团冠军（与刘亚楠、廖泓然）
+世青赛：男单冠军、混双冠军（与刘高阳）、男团冠军（与林高远、徐晨皓、范胜鹏）</div>
+                        </div>
+                    </div>
+
+                    <!-- 2013年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2013 <span>惊天下，获赞赏，锐意少年世无双</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2013.png" alt="2013年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2013年 崭露头角</div>'">
+                            </div>
+                            <div class="timeline-desc">中国公开赛：U21男单冠军
+釜山亚锦赛：男团冠军（与马龙、许昕、闫安、周雨）
+南京亚青会：男单冠军
+辽宁全运会：男双冠军（与周雨）、男团冠军（与王皓、陈玘、周雨、尹航）
+东亚运动会：男单冠军、男团冠军（与郝帅、闫安、周雨、马特）
+波兰公开赛：男单冠军
+德国公开赛：男单冠军</div>
+                        </div>
+                    </div>
+
+                    <!-- 2014年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2014 <span>负剑气，破长空，奔赴山海逐梦想</span></div>
+                           <div class="timeline-img-box">
+                                <img src="照片集/2014.png" alt="2012年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2012年 初入国家队</div>'">
+                            </div>
+                            <div class="timeline-desc">科威特公开赛：男单冠军
+东京世乒赛：男团冠军（与王皓、张继科、马龙、许昕）
+中国公开赛：男双冠军（与马龙）
+南京青奥会：男单冠军、混团冠军（与刘高阳）
+仁川亚运会：男团冠军（与张继科、马龙、许昕、周雨）
+全锦赛：男单冠军、男双冠军（与许昕）
+瑞典公开赛：男单冠军</div>
+                        </div>
+                    </div>
+
+                    <!-- 2015年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2015 <span>万山无阻，长风浩荡，鲜衣怒马似朝阳</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2015.png" alt="2015年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2015年 万山无阻</div>'">
+                            </div>
+                            <div class="timeline-desc">迪拜团体世界杯：男团冠军（与张继科、马龙、许昕、方博）
+直通苏州：男单冠军（第一名直通）
+中国公开赛：男双冠军（与许昕）
+芭提雅亚锦赛：男单冠军、男双冠军（与许昕）、混双冠军（与陈梦）、男团冠军（与张继科、马龙、许昕、方博）
+全锦赛：混双冠军（与木子）
+波兰公开赛：男单冠军
+瑞典公开赛：男单冠军</div>
+                        </div>
+                    </div>
+
+                    <!-- 2016年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2016 <span>热血篇章，一苇以航，少年英雄悟成长</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2016.jpg" alt="2016年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2016年 热血篇章</div>'">
+                            </div>
+                            <div class="timeline-desc">吉隆坡世乒赛：男团冠军（与张继科、马龙、许昕、方博）
+卡塔尔公开赛：男双冠军（与张继科）
+日本公开赛：男单冠军
+亚欧对抗赛：男团冠军（与庄智渊、黄镇廷、朱世赫、高宁）
+中国公开赛：男单冠军
+全锦赛：男单冠军、男双冠军（与周雨）
+萨尔布吕肯世界杯：男单冠军
+乒超联赛：男团冠军（与周雨、徐晨皓、周恺、宋旭、赵钊彦）</div>
+                        </div>
+                    </div>
+
+                    <!-- 2017年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2017 <span>浩然气，迎光立，溢彩流光耀天际</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/./2017.png" alt="2017年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2017年 浩然气</div>'">
+                            </div>
+                            <div class="timeline-desc">直通杜赛：男单冠军（第一名直通）
+无锡亚锦赛：男单冠军、男双冠军（与林高远）、男团冠军（与张继科、马龙、许昕、崔庆磊）
+杜塞尔多夫世乒赛：男双冠军（与许昕）
+天津全运会：男双冠军（与周雨）
+瑞典公开赛：男双冠军（与许昕）
+国际乒联总决赛：男单冠军</div>
+                        </div>
+                    </div>
+
+                    <!-- 2018年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2018 <span>承期许，名远扬，肩负责任勇担当</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2018.png" alt="2018年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2018年 承期许</div>'">
+                            </div>
+                            <div class="timeline-desc">匈牙利公开赛：男单冠军、男双冠军（与于子洋）
+伦敦团体世界杯：男团冠军（与马龙、许昕、林高远、于子洋）
+卡塔尔公开赛：男单冠军、男双冠军（与许昕）
+横滨亚洲杯：男单冠军
+瑞典世乒赛：男团冠军（与马龙、许昕、林高远、王楚钦）
+中国公开赛：男双冠军（与林高远）
+雅加达亚运会：男单冠军、男团冠军（与梁靖崑、林高远、王楚钦、薛飞）
+巴黎世界杯：男单冠军
+瑞典公开赛：男单冠军</div>
+                        </div>
+                    </div>
+
+                    <!-- 2019年 - 核心优化目标 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2019 <span>坚韧不拔，载霜雪归，一腔孤勇挽风浪</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2019.png" alt="2019年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2019年 坚韧不拔</div>'">
+                            </div>
+                            <div class="timeline-desc">直通布达佩斯：男单冠军（第一名直通）
+横滨亚洲杯：男单冠军
+日本公开赛：男双冠军（与许昕）
+韩国公开赛：男双冠军（与许昕）
+印尼亚锦赛：男团冠军（与许昕、梁靖崑、林高远、王楚钦）
+瑞典公开赛：男双冠军（与许昕）
+德国公开赛：男单冠军
+武汉军运会：男单冠军、男双冠军（与周雨）、混双冠军（与木子）、男团冠军（与周雨、周恺、徐晨皓）
+东京团体世界杯：男团冠军（与马龙、许昕、梁靖崑、林高远）
+奥地利公开赛：男单冠军
+成都世界杯：男单冠军
+国际乒联总决赛：男单冠军、男双冠军（与许昕）</div>
+                        </div>
+                    </div>
+
+                    <!-- 2020年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2020 <span>稳扎稳打，百炼成钢，九万里处凭风上</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2020.png" alt="2020年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2020年 百炼成钢</div>'">
+                            </div>
+                            <div class="timeline-desc">直通釜山：男单冠军（第一名直通）
+卡塔尔公开赛：男单冠军
+全锦赛：男单冠军
+威海世界杯：男单冠军</div>
+                        </div>
+                    </div>
+
+                    <!-- 2021年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2021 <span>聚沙成塔，繁星流动，矢志不渝守荣光</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2021.png" alt="2021年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2021年 聚沙成塔</div>'">
+                            </div>
+                            <div class="timeline-desc">直通WTT大满贯世乒赛（南阳站）：男单冠军
+2020东京奥运会：男团冠军（与马龙、许昕）
+陕西全运会：男单冠军、男团冠军（与林高远、周启豪、张超、张鑫）
+世乒赛热身赛：男单冠军
+休斯敦世乒赛：男单冠军
+WTT世界杯决赛：男单冠军</div>
+                        </div>
+                    </div>
+
+                    <!-- 2022年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2022 <span>如星璀璨，有知无畏，心向远方自明朗</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2022.jpg" alt="2022年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2022年 如星璀璨</div>'">
+                            </div>
+                            <div class="timeline-desc">WTT新加坡大满贯：男单冠军、男双冠军（与王楚钦）
+成都世乒赛：男团冠军（与马龙、王楚钦、梁靖崑、林高远）
+全锦赛：男单冠军、男团冠军（与许昕、赵子豪、周恺、赵钊彦）</div>
+                        </div>
+                    </div>
+
+                    <!-- 2023年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2023 <span>星辉熠熠，与光同航，汗水写就不凡篇章</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/2023.jpg" alt="2023年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2023年 星辉熠熠</div>'">
+                            </div>
+                            <div class="timeline-desc">WTT新加坡大满贯：男单冠军、男双冠军（与王楚钦）
+WTT新乡冠军赛：男单冠军
+德班世乒赛：男单冠军、男双冠军（与王楚钦）
+WTT球星挑战赛卢布尔雅那站：男单冠军
+亚锦赛：男团冠军（与马龙、王楚钦、梁靖崑、林高远）、男双冠军（与林高远）
+杭州亚运会：男团冠军（与马龙、王楚钦、梁靖崑、林高远）、男双冠军（与王楚钦）
+全锦赛：男团冠军（与许昕、周恺、赵子豪、赵钊彦）
+混合团体世界杯：团体冠军（与马龙、王楚钦、林高远、孙颖莎、王曼昱、陈梦、王艺迪）</div>
+                        </div>
+                    </div>
+
+                    <!-- 2024年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024 <span>气贯长虹，横扫千军，坐看云起再看远方</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/巴黎夺冠.jpg" alt="2024年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2024年 气贯长虹</div>'">
+                            </div>
+                            <div class="timeline-desc">釜山世乒赛团体赛：男团冠军（与马龙、王楚钦、梁靖崑、林高远）
+WTT重庆冠军赛：男单冠军
+巴黎奥运会：男单冠军、男团冠军（与马龙、王楚钦）
+全锦赛：男团冠军（与许昕、周恺、赵子豪、赵钊彦）</div>
+                        </div>
+                    </div>
+
+                    <!-- 2025年 - 放回.timeline容器内 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2025 <span>新征程，再出发，步履不停向新章</span></div>
+                            <div class="timeline-img-box">
+                                <img src="照片集/德甲.png" alt="2025年樊振东" class="timeline-img" onerror="this.outerHTML='<div class=timeline-img-placeholder>2025年 新征程</div>'">
+                            </div>
+                            <div class="timeline-desc">2024年12月27日樊振东退出世界排名，但并没有退出国家队，也不会退役！
+2025年11月17日，樊振东战胜国乒绝对主力王楚钦、林诗栋，收获全运会男单金牌，成为全运会历史上第二位男单卫冕冠军！
+截至2025年12月：国家队生涯累计斩获119冠，世界冠军数增至22个
+<span class="gold-highlight">未完待续……</span></div>
+                        </div>
+                    </div>
+
+                </div> <!-- .timeline 容器闭合 -->
+            </div> <!-- .career-container 闭合 -->
+        </section> <!-- .career-section 闭合 -->
+    </main>
+
+   <footer class="footer">
+    <div class="footer-container">
+        <!-- 品牌信息区 -->
+        <div class="footer-brand">
+            <div class="brand-header">
+                <h3 class="footer-logo">
+                    樊振东· 乒坛传奇
+                </h3>
+                <div class="footer-line"></div>
+            </div>
+            <div class="slogan-container">
+                <p class="footer-slogan">十年磨剑，以梦为马；乒坛逐光，铸就传奇</p>
+                <p class="footer-slogan">大雪压青松，青松挺且直。</p>
+                <p class="footer-slogan">要知松高洁，待到雪化时！</p>
+            </div>
+        </div>
+        
+        <!-- 导航和版权区域 -->
+        <div class="footer-bottom-section">
+            <!-- 单行导航 -->
+            <div class="footer-nav-container">
+                <h4 class="footer-nav-title">快速导航</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="./index.html" class="footer-nav-link">首页</a></li>
+                    <li><a href="./职业生涯.html" class="footer-nav-link">职业生涯</a></li>
+                    <li><a href="./荣誉成就.html" class="footer-nav-link">荣誉成就</a></li>
+					<li><a href="./精神品质.html" class="footer-nav-link">精神品质</a></li>
+                    <li><a href="./赛场风采.html" class="footer-nav-link">赛场风采</a></li>
+                    <li><a href="./最新消息.html" class="footer-nav-link">最新消息</a></li>
+                    <li><a href="./联系我们.html" class="footer-nav-link">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <!-- 版权和祝福 -->
+            <div class="footer-legal">
+                <p class="footer-copyright">
+                    &copy; 版权樊振东球迷Fantacia所有
+                </p>
+                <p class="footer-disclaimer">
+                    祝我们各自拥有美好的人生！
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* 页脚整体样式 */
+.footer {
+    background: linear-gradient(135deg, rgba(8, 28, 88, 0.95), rgba(5, 16, 56, 0.95));
+    color: #e0e0e0;
+    padding: 50px 0 30px;
+    font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.8) 50%, 
+        transparent 100%);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 品牌信息区样式 */
+.footer-brand {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.brand-header {
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    background: linear-gradient(45deg, #EFC848, #ff9a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.footer-logo span {
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.footer-line {
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.6) 50%, 
+        transparent 100%);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.slogan-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-slogan {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    position: relative;
+    padding: 0 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer-slogan:first-child {
+    font-size: 18px;
+    color: #EFC848;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.footer-slogan:last-child {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 导航和版权区域 */
+.footer-bottom-section {
+    border-top: 1px solid rgba(239, 200, 72, 0.2);
+    padding-top: 30px;
+}
+
+.footer-nav-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.footer-nav-title {
+    color: #EFC848;
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+.footer-nav-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #EFC848;
+    transition: width 0.3s ease;
+}
+
+.footer-nav-link:hover {
+    color: #EFC848;
+}
+
+.footer-nav-link:hover::after {
+    width: 100%;
+}
+
+/* 版权和祝福 */
+.footer-legal {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-copyright {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-disclaimer {
+    margin: 0;
+    font-size: 15px;
+    color: rgba(239, 200, 72, 0.9);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 25px;
+    }
+    
+    .footer-logo {
+        font-size: 24px;
+    }
+    
+    .footer-logo span {
+        font-size: 28px;
+    }
+    
+    .footer-slogan {
+        font-size: 15px;
+        padding: 0 15px;
+    }
+    
+    .footer-slogan:first-child {
+        font-size: 16px;
+    }
+    
+    .footer-nav-list {
+        gap: 15px 20px;
+    }
+    
+    .footer-nav-link {
+        font-size: 14px;
+    }
+    
+    .footer-nav-title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-nav-list {
+        gap: 12px 15px;
+    }
+    
+    .footer-nav-link {
+        font-size: 13px;
+    }
+    
+    .footer-container {
+        padding: 0 15px;
+    }
+    
+    .slogan-container {
+        gap: 8px;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-brand,
+.footer-nav-container,
+.footer-legal {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.footer-nav-container {
+    animation-delay: 0.2s;
+}
+
+.footer-legal {
+    animation-delay: 0.4s;
+}
+</style>
+
+</body>
+</html>
