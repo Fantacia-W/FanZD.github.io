@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樊振东-从紫微星到超级全满贯</title>
+    <link rel="shortcut icon" href="./SVG/fujian.svg">
+    <style>
+        /* 全局CSS变量 */
+        :root {
+            --primary-navy: #081C58;    /* 主色：更深的藏蓝 */
+            --primary-gold: #EFC848;    /* 主点缀：更亮的鎏金 */
+            --light-gold: #F8D768;      /* 次点缀：超亮鎏金 */
+            --dark-bg: #051038;         /* 全局背景：极致深的藏蓝 */
+            --overlay-bg: rgba(5, 16, 56, 0.8); /* 遮罩 */
+            --text-white: #F8F9FC;      /* 基础白字 */
+            --text-gray: rgba(248, 249, 252, 0.8); /* 浅灰字 */
+            --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* 导航栏阴影 */
+            --dark-gold: #D4A732;       /* 深金色 - 悬停状态 */
+            --light-navy: #0f245e;      /* 浅藏蓝 - 卡片背景 */
+            --accent-red: #D62828;      /* 中国红 - 特别强调 */
+            --disabled-gray: rgba(248, 249, 252, 0.6); /* 禁用状态文字 */
+            --hover-gold: #F8D768;
+            --active-gold: #D4A732;
+            --button-bg-hover: rgba(239, 200, 72, 0.1);
+            --link-hover-color: var(--light-gold);
+            --gold-glow: 0 0 15px rgba(239, 200, 72, 0.4);
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --card-glow: 0 0 0 1px rgba(239, 200, 72, 0.15);
+            --nav-shadow-strong: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --medal-gradient: linear-gradient(135deg, var(--primary-gold) 0%, var(--light-gold) 100%);
+            --navy-gradient: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+        }
+
+        /* 全局样式重置+背景 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body.dark_theme {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            min-height: 100vh;
+            font-family: "Microsoft Yahei", sans-serif;
+            padding-top: 80px; /* 给导航栏留空间 */
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: rgba(8, 28, 88, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(239, 200, 72, 0.3);
+            box-shadow: var(--nav-shadow-strong);
+            padding: 0.8rem 0;
+        }
+
+        .header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .big-logo {
+            margin: 0;
+        }
+
+        .big-logo a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+
+        .big-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .big-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background-color: rgba(239, 200, 72, 0.2);
+            color: var(--light-gold);
+        }
+
+        /* 汉堡菜单按钮 */
+        .nav-toggle-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .nav-toggle-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-white);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background-color: var(--light-gold);
+        }
+
+        .nav-toggle-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background-color: var(--light-gold);
+        }
+
+        /* 导航菜单 */
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-link {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-link:hover {
+            color: var(--light-gold) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .navbar-link.color {
+            color: var(--primary-gold) !important;
+            font-weight: 700;
+        }
+
+        .navbar-link.color::after {
+            width: 100%;
+            background-color: var(--primary-gold);
+        }
+
+        /* 移动端导航适配 */
+        @media (max-width: 768px) {
+            .nav-toggle-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 0;
+                height: 100vh;
+                background-color: var(--primary-navy);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                overflow: hidden;
+                transition: width 0.4s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .navbar.active {
+                width: 80%;
+            }
+
+            .navbar-list {
+                flex-direction: column;
+                gap: 2rem;
+                width: 100%;
+            }
+
+            .navbar-link {
+                font-size: 1.2rem;
+                padding: 1rem 0;
+                display: block;
+                width: 100%;
+            }
+
+            .header .container {
+                padding: 0 1rem;
+            }
+
+            .big-logo a {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 最新消息页面头部 */
+        .news-header {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .news-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--medal-gradient);
+            border-radius: 2px;
+        }
+
+        .news-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(239, 200, 72, 0.2);
+        }
+
+        .news-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* 四卡片布局样式 */
+        .more-areas {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .more-areas-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .more-areas-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+        }
+
+        /* 图片容器 - 铺满卡片 */
+        .card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+            transition: transform 0.4s ease;
+        }
+
+        .more-areas-card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        /* 遮罩层 */
+        .card-mask {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, var(--dark-bg) 85%);
+            z-index: 1;
+        }
+
+        .more-areas-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), var(--gold-glow);
+            border-color: var(--light-gold);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 30px 25px;
+            width: 100%;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .more-areas-card:hover .card-title {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-white);
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .btn-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .btn-link:hover {
+            color: var(--light-gold);
+            transform: translateX(3px);
+        }
+
+        .btn-link:hover::after {
+            width: 100%;
+        }
+
+        /* 消息卡片容器 */
+        .news-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        /* 消息卡片样式 - 优化左右布局 */
+        .news-card {
+            background: linear-gradient(135deg, rgba(15, 36, 94, 0.3), rgba(5, 16, 56, 0.4));
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            position: relative;
+            display: flex;
+            align-items: stretch; /* 让子元素高度一致 */
+            min-height: 400px; /* 保证最小高度 */
+        }
+
+        /* 卡片悬停效果 */
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), var(--gold-glow);
+            border-color: var(--light-gold);
+        }
+
+        /* 卡片顶部金色线条 */
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--medal-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .news-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 卡片时间标签 */
+        .news-time {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(8, 28, 88, 0.8);
+            color: var(--light-gold);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(239, 200, 72, 0.3);
+        }
+
+        /* 左侧媒体区 - 优化比例 */
+        .news-media-wrapper {
+            flex: 1 1 45%; /* 媒体区占45% */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 竖版图容器 */
+        .news-vertical-img {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .vertical-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* 黄色提示文字 */
+        .gold-tip-text {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(239, 200, 72, 0.1);
+            border-bottom: 1px solid rgba(239, 200, 72, 0.3);
+            color: var(--light-gold);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* 横版图/视频容器 - 自适应高度 */
+        .news-horizontal-media {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* 横版图样式 */
+        .horizontal-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .news-card:hover .horizontal-img {
+            transform: scale(1.05);
+        }
+
+        /* 视频样式优化 */
+        .horizontal-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: var(--primary-navy);
+            border: none;
+        }
+
+        /* 右侧文字区 - 优化比例和内边距 */
+        .news-content {
+            flex: 1 1 55%; /* 文字区占55% */
+            padding: 40px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(5, 16, 56, 0.2);
+        }
+
+        .news-card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover .news-card-title {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .news-card-text {
+            font-size: 1.1rem;
+            color: var(--text-white);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* 关键词悬停放大 */
+        .news-keyword {
+            color: var(--light-gold);
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .news-keyword:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 8px rgba(248, 215, 104, 0.6);
+        }
+
+        /* 板块标题样式 */
+        .sport-detail-header {
+            max-width: 1400px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .sport-detail-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light-gold);
+            margin-bottom: 10px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .sport-detail-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--medal-gradient);
+            border-radius: 1px;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-navy) 100%);
+            color: var(--text-gray);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(239, 200, 72, 0.3);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-white);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-gold);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .footer-logo span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gold);
+            border-radius: 1px;
+        }
+
+        .footer-slogan {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-gray);
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: rgba(248, 249, 252, 0.6);
+        }
+
+        .footer-nav-title {
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .footer-nav-list {
+            list-style: none;
+        }
+
+        .footer-nav-link {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-nav-link:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon i {
+            color: var(--primary-gold);
+            margin-right: 10px;
+            font-style: normal;
+        }
+
+        .social-icon:hover {
+            color: var(--light-gold);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding: 20px 20px 0;
+            border-top: 1px solid rgba(239, 200, 72, 0.15);
+        }
+
+        .footer-disclaimer {
+            font-size: 0.85rem;
+            color: rgba(248, 249, 252, 0.5);
+            text-align: center;
+            padding-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* 响应式适配优化 */
+        @media (max-width: 1200px) {
+            .news-card {
+                min-height: 380px;
+            }
+            .news-content {
+                padding: 35px 30px;
+            }
+            .news-card-title {
+                font-size: 1.8rem;
+            }
+            .news-card-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            /* 中等屏幕下卡片改为上下布局 */
+            .news-card {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .news-media-wrapper {
+                flex: 1 1 300px; /* 固定媒体区高度 */
+            }
+            .news-content {
+                flex: 1 1 auto;
+            }
+            .news-horizontal-media {
+                min-height: 300px;
+            }
+            .sport-detail-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-title {
+                font-size: 2.2rem;
+            }
+            .news-subtitle {
+                font-size: 1rem;
+            }
+            .more-areas-card {
+                height: 250px;
+            }
+            .card-title {
+                font-size: 1.4rem;
+            }
+            .news-media-wrapper {
+                flex: 1 1 250px;
+            }
+            .news-horizontal-media {
+                min-height: 250px;
+            }
+            .news-content {
+                padding: 30px 20px;
+            }
+            .news-card-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+            .sport-detail-title {
+                font-size: 1.8rem;
+            }
+            .footer {
+                padding: 40px 0 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .more-areas-list {
+                gap: 20px;
+            }
+            .more-areas-card {
+                height: 220px;
+            }
+            .news-time {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+                top: 15px;
+                right: 15px;
+            }
+            .news-media-wrapper {
+                flex: 1 1 200px;
+            }
+            .news-horizontal-media {
+                min-height: 200px;
+            }
+            .gold-tip-text {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body class="dark_theme">
+    <!-- 头部导航栏 -->
+    <header class="header" data-header>
+        <div class="container">
+            <h1 class="h1 big-logo">
+                <a href="./index.html"><span>樊振东·超级金满贯</span></a>
+            </h1>
+
+            <div class="navbar-actions">
+                <button class="theme-btn" data-theme-btn>
+                    <span class="icon">⭐⭐⭐</span>
+                </button>
+            </div>
+
+            <button class="nav-toggle-btn" data-nav-toggle-btn>
+                <span class="one"></span>
+                <span class="two"></span>
+                <span class="three"></span>
+            </button>
+
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="./index.html" class="navbar-link ">首页</a>
+                    </li>
+                    <li>
+                        <a href="./职业生涯.html"  class="navbar-link">职业生涯</a>
+                    </li>
+                    <li>
+                        <a href="./荣誉成就.html" class="navbar-link">荣誉成就</a>
+                    </li>
+					<li>
+                        <a href="./精神品质.html" class="navbar-link">精神品质</a>
+                    </li>
+                    <li>
+                        <a href="./赛场风采.html" class="navbar-link">赛场风采</a>
+                    </li>
+                    <li>
+                        <a href="./最新消息.html" class="navbar-link color">最新消息</a>
+                    </li>
+                    <li>
+                        <a href="./联系我们.html" class="navbar-link">联系我们</a>
+                    </li>
+					<li>
+                        <a href="./Login.html" class="navbar-link">登录</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 最新消息头部 -->
+    <section class="news-header">
+        <h2 class="news-title">樊振东 · 最新动态</h2>
+        <p class="news-subtitle">
+            实时追踪樊振东最新赛场表现、专访发声与职业发展，见证传奇继续书写
+        </p>
+    </section>
+
+    <!-- 四卡片布局区域 -->
+    <section class="more-areas">
+        <ul class="more-areas-list">
+            <!-- 卡片1：退出世界排名 -->
+            <li>
+                <div class="more-areas-card">
+                    <img src="照片集/退出世界排名照片.jpg" alt="樊振东退出世界排名" class="card-img">
+                    <div class="card-mask"></div>
+                    <div class="card-content">
+                        <h3 class="h3 card-title">退出世界排名</h3>
+                        <a href="#" class="btn-link">
+                            <span class="span">2024年12月27日</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <!-- 卡片2：萨尔布吕肯俱乐部 -->
+            <li>
+                <div class="more-areas-card">
+                    <img src="照片集/德甲发球.jpg" alt="樊振东加盟萨尔布吕肯俱乐部" class="card-img">
+                    <div class="card-mask"></div>
+                    <div class="card-content">
+                        <h3 class="h3 card-title">萨尔布吕肯俱乐部</h3>
+                        <a href="#" class="btn-link">
+                            <span class="span">2025年6月1日</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <!-- 卡片3：凤凰卫视独家专访 -->
+            <li>
+                <div class="more-areas-card">
+                    <img src="照片集/凤凰卫视独家专访.jpg" alt="樊振东凤凰卫视独家专访" class="card-img">
+                    <div class="card-mask"></div>
+                    <div class="card-content">
+                        <h3 class="h3 card-title">凤凰卫视独家专访</h3>
+                        <a href="#" class="btn-link">
+                            <span class="span">2025年7月26日</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <!-- 卡片4：全运会男单卫冕冠军 -->
+            <li>
+                <div class="more-areas-card">
+                    <img src="照片集/全运会夺冠.png" alt="樊振东全运会男单卫冕冠军" class="card-img">
+                    <div class="card-mask"></div>
+                    <div class="card-content">
+                        <h3 class="h3 card-title">全运会男单卫冕冠军</h3>
+                        <a href="#" class="btn-link">
+                            <span class="span">2025年11月16日</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- 最新消息卡片容器 -->
+    <section class="news-container">
+        <!-- 板块标题：正式退出世界排名 -->
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">正式退出世界排名</h3>
+        </div>
+        
+        <!-- 卡片1：退出世界排名 -->
+        <div class="news-card">
+            <div class="news-time">2024.12</div>
+            
+            <!-- 左侧媒体区 -->
+            <div class="news-media-wrapper">
+                <div class="news-horizontal-media">
+                    <img src="照片集/退出世界排名照片.jpg" alt="樊振东退出世界排名" class="horizontal-img">
+                </div>
+            </div>
+
+            <!-- 右侧文字区 -->
+            <div class="news-content">
+                <p class="news-card-text">
+                    2024年12月27日<span class="news-keyword">樊振东正式退出世界排名</span>。
+                </p>
+                <p class="news-card-text">
+                    他在微博写道：五月写下last dance的时候已经预想到了巴黎可能是我的最后一届奥运会，必将全力以赴为国而战。圆满完成奥运任务后，由于巴黎周期遗留了巨大心理消耗，除了下届全运会确定参加，我对未来职业生涯尚未展开具体规划。近日WTT颁布了不参赛就罚款的新规，个人实在无力承受但依然尊重国际组织，所以目前只能选择退出世界排名。按照国际乒联和中国乒协的要求，本周已提交报告。
+                </p>
+                <p class="news-card-text">
+                    <span class="news-keyword">我还是我，不会退役</span>，会继续努力参与到更多不同的赛场中。
+                </p>
+                <p class="news-card-text">Never stop chasing my wildest dreams🩵</p>
+                <p class="news-card-text">
+                    乒乓球是童年少年青年岁月的荣耀勋章，而对体育的无限热爱将会充盈一生。
+                </p>
+                <p class="news-card-text">
+                    <span class="news-keyword">不会远离乒乓球，更不会离席体育</span>。
+                </p>
+                <p class="news-card-text">It’s time to try defying gravity💚</p>
+            </div>
+        </div>
+
+        <!-- 板块标题：凤凰卫视独家专访 -->
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">凤凰卫视独家专访</h3>
+        </div>
+        
+        <!-- 卡片2：凤凰卫视独家专访 -->
+        <div class="news-card">
+            <div class="news-time">2025.07</div>
+            
+            <!-- 左侧媒体区 -->
+            <div class="news-media-wrapper">
+                <div class="gold-tip-text">直面饭圈文化：让乒乓球回归纯粹竞技</div>
+                <div class="news-horizontal-media">
+                    <video class="horizontal-video" poster="照片集/凤凰卫视独家专访.jpg" controls>
+                        <source src="视频/凤凰卫视独家专访.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放，请升级浏览器
+                    </video>
+                </div>
+            </div>
+
+            <!-- 右侧文字区 -->
+            <div class="news-content">
+                <h3 class="news-card-title">首次回应加盟德甲和饭圈文化</h3>
+                <p class="news-card-text">
+                    樊振东直面回应饭圈文化问题，明确表示：<span class="news-keyword">饭圈文化对乒乓球项目和运动员个人百害无一利</span>。乒乓球是纯粹的竞技体育，不应该沦为饭圈的战场。希望球迷关注赛场本身，抵制饭圈化、非理性应援。让赛场回归真实与热血，愿每一份努力都被善意守护，愿真正热爱体育的人，迎来晴朗的明天。
+                </p>
+                <p class="news-card-text">
+                    选择加入德国萨尔布吕肯俱乐部是经过国家队、上海队及乒协协商的<span class="news-keyword">“个性化备战方案”</span>。希望能够过在欧洲打联赛保持竞技状态，学习多元打法，感受海外运营模式和乒乓文化，助力未来中国乒乓国际化。
+                </p>
+            </div>
+        </div>
+
+        <!-- 板块标题：全运会男单卫冕冠军 -->
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">全运会男单卫冕冠军</h3>
+        </div>
+        
+        <!-- 卡片3：全运会卫冕冠军 -->
+        <div class="news-card">
+            <div class="news-time">2025.11</div>
+            
+            <!-- 左侧媒体区 -->
+            <div class="news-media-wrapper">
+                <div class="gold-tip-text">全运会男单第二位卫冕冠军选手</div>
+                <div class="news-horizontal-media">
+                    <video class="horizontal-video" poster="照片集/全运会夺冠.png" controls>
+                        <source src="视频/全运会视频.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放，请升级浏览器
+                    </video>
+                </div>
+            </div>
+
+            <!-- 右侧文字区 -->
+            <div class="news-content">
+                <h3 class="news-card-title">从“暴力熊猫”到“技术宗师”</h3>
+                <p class="news-card-text">
+                    2025全运会，樊振东依次战胜王楚钦、林诗栋，卫冕男单冠军。樊振东的打法被称为<span class="news-keyword">“大模型开源”</span>。其战术库包含多样化技术组合，吸收了欧洲反手技术精髓，弥补了传统中式正手体系的局限，实现了技术自信和心态解放的协同进化，乒乓球大满贯邓亚萍评价樊振东为“T0级控场大师”。
+                </p>
+                <p class="news-card-text">
+                    从早年“暴力熊猫”风格转型为“控场大师”，反手拧拉结合落点控制，攻防兼备体系近乎无解。带领上海队夺得男团银牌，获评“全运会体育频道风尚奖”和“上海市体育事业重大贡献奖”。
+                </p>
+            </div>
+        </div>
+
+        <!-- 板块标题：加盟萨尔布吕肯俱乐部 -->
+        <div class="sport-detail-header">
+            <h3 class="sport-detail-title">加盟萨尔布吕肯俱乐部</h3>
+        </div>
+        
+        <!-- 卡片4：加盟德甲欧冠参赛中 -->
+        <div class="news-card">
+            <div class="news-time">2025.12</div>
+            
+            <!-- 左侧媒体区 -->
+            <div class="news-media-wrapper">
+                <div class="news-horizontal-media">
+                    <img src="照片集/德甲.png" alt="樊振东德甲欧冠比赛" class="horizontal-img">
+                </div>
+                <div class="gold-tip-text">樊振东助力萨尔布吕肯在德甲联赛中位列第二</div>
+            </div>
+
+            <!-- 右侧文字区 -->
+            <div class="news-content">
+                <h3 class="news-card-title">德甲欧冠2025年完美收官</h3>
+                <p class="news-card-text">在超过3500名球迷的助威下，萨尔布卢肯俱乐部主场3:2力克来自杜塞尔多夫的纪录冠军球队！其中樊振东独得两分，弗朗西斯卡 &amp; 迈斯纳奉献了世界级双打 🔥&nbsp; </p>
+ 
+                <p class="news-card-text">在TTBL第11轮对阵杜塞尔多夫的比赛中，樊振东以 90% 的得票率当选 nubia 本场最佳球员（Man of the Match）！赛后模仿C罗“Siu”动作引发球迷狂欢，被德国媒体赞誉为“凯撒·樊”。此前在 WTT 香港总决赛斩获男单冠军的日本选手张本智和，获胜后多次模仿樊振东的全运会经典庆祝动作，以此向樊振东致敬，也表露了自己渴望与樊振东赛场交手的心愿。 </p>
+<p class="news-card-text">
+          萨尔布吕肯市长手制中文PPT为樊振东助威，学习中文诚意满满。中国球迷现场齐唱粤语歌《真的爱你》，德国球迷用中文高喊“加油”，形成独特赛场文化。
+      </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+    <div class="footer-container">
+        <!-- 品牌信息区 -->
+        <div class="footer-brand">
+            <div class="brand-header">
+                <h3 class="footer-logo">
+                    樊振东· 乒坛传奇
+                </h3>
+                <div class="footer-line"></div>
+            </div>
+            <div class="slogan-container">
+                <p class="footer-slogan">十年磨剑，以梦为马；乒坛逐光，铸就传奇</p>
+                <p class="footer-slogan">大雪压青松，青松挺且直。</p>
+                <p class="footer-slogan">要知松高洁，待到雪化时！</p>
+            </div>
+        </div>
+        
+        <!-- 导航和版权区域 -->
+        <div class="footer-bottom-section">
+            <!-- 单行导航 -->
+            <div class="footer-nav-container">
+                <h4 class="footer-nav-title">快速导航</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="./index.html" class="footer-nav-link">首页</a></li>
+                    <li><a href="./职业生涯.html" class="footer-nav-link">职业生涯</a></li>
+                    <li><a href="./荣誉成就.html" class="footer-nav-link">荣誉成就</a></li>
+					<li><a href="./精神品质.html" class="footer-nav-link">精神品质</a></li>
+                    <li><a href="./赛场风采.html" class="footer-nav-link">赛场风采</a></li>
+                    <li><a href="./最新消息.html" class="footer-nav-link">最新消息</a></li>
+                    <li><a href="./联系我们.html" class="footer-nav-link">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <!-- 版权和祝福 -->
+            <div class="footer-legal">
+                <p class="footer-copyright">
+                    &copy; 版权樊振东球迷Fantacia所有
+                </p>
+                <p class="footer-disclaimer">
+                    祝我们各自拥有美好的人生！
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* 页脚整体样式 */
+.footer {
+    background: linear-gradient(135deg, rgba(8, 28, 88, 0.95), rgba(5, 16, 56, 0.95));
+    color: #e0e0e0;
+    padding: 50px 0 30px;
+    font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.8) 50%, 
+        transparent 100%);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 品牌信息区样式 */
+.footer-brand {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.brand-header {
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    background: linear-gradient(45deg, #EFC848, #ff9a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.footer-logo span {
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.footer-line {
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(239, 200, 72, 0.6) 50%, 
+        transparent 100%);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.slogan-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-slogan {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    position: relative;
+    padding: 0 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.footer-slogan:first-child {
+    font-size: 18px;
+    color: #EFC848;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.footer-slogan:last-child {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 导航和版权区域 */
+.footer-bottom-section {
+    border-top: 1px solid rgba(239, 200, 72, 0.2);
+    padding-top: 30px;
+}
+
+.footer-nav-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.footer-nav-title {
+    color: #EFC848;
+    font-size: 18px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+.footer-nav-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #EFC848;
+    transition: width 0.3s ease;
+}
+
+.footer-nav-link:hover {
+    color: #EFC848;
+}
+
+.footer-nav-link:hover::after {
+    width: 100%;
+}
+
+/* 版权和祝福 */
+.footer-legal {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-copyright {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-disclaimer {
+    margin: 0;
+    font-size: 15px;
+    color: rgba(239, 200, 72, 0.9);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 25px;
+    }
+    
+    .footer-logo {
+        font-size: 24px;
+    }
+    
+    .footer-logo span {
+        font-size: 28px;
+    }
+    
+    .footer-slogan {
+        font-size: 15px;
+        padding: 0 15px;
+    }
+    
+    .footer-slogan:first-child {
+        font-size: 16px;
+    }
+    
+    .footer-nav-list {
+        gap: 15px 20px;
+    }
+    
+    .footer-nav-link {
+        font-size: 14px;
+    }
+    
+    .footer-nav-title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-nav-list {
+        gap: 12px 15px;
+    }
+    
+    .footer-nav-link {
+        font-size: 13px;
+    }
+    
+    .footer-container {
+        padding: 0 15px;
+    }
+    
+    .slogan-container {
+        gap: 8px;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-brand,
+.footer-nav-container,
+.footer-legal {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.footer-nav-container {
+    animation-delay: 0.2s;
+}
+
+.footer-legal {
+    animation-delay: 0.4s;
+}
+</style>
+</body>
+</html>
